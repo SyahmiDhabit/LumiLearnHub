@@ -46,8 +46,8 @@ if (
 
         if ($conn->query($sql) === TRUE) {
             echo "<p>Student successfully registered!</p>";
-            echo "<p>You will be redirected to the login page in 7 seconds...</p>";
-            echo "<meta http-equiv='refresh' content='7;url=studentlogin.html'>";
+            echo "<p>You will be redirected to the login page in 5 seconds...</p>";
+            echo "<meta http-equiv='refresh' content='5;url=studentlogin.html'>";
             echo "<table border='1' cellpadding='10'>";
             echo "<tr><th>Field Name</th><th>Value</th></tr>";
             echo "<tr><td>student_fullName</td><td>$student_fullName</td></tr>";
