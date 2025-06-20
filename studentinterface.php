@@ -87,7 +87,7 @@ $studentName = $_SESSION['student_fullname'];
     });
 
     document.getElementById("find-tutor-btn").addEventListener("click", function () {
-      window.location.href = "findtutor.html";
+      window.location.href = "findtutor.php";
     });
 
     document.getElementById("top-tutors-btn").addEventListener("click", function () {
@@ -107,11 +107,11 @@ $studentName = $_SESSION['student_fullname'];
     });
 
     document.getElementById("my-subject-btn").addEventListener("click", function () {
-      window.location.href = "subjectstudent.html";
+      window.location.href = "subjectstudent.php";
     });
 
     document.getElementById("feedback-btn").addEventListener("click", function () {
-      window.location.href = "feedbackstudent.html";
+      window.location.href = "feedbackstudent.php";
     });
 
     document.querySelector(".user-top-icon").addEventListener("click", function () {

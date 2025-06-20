@@ -186,8 +186,8 @@
   document.getElementById("find-tutor-btn").addEventListener("click", () => window.location.href = "findtutor.php");
   document.getElementById("top-tutors-btn").addEventListener("click", () => window.location.href = "toptutors.html");
   document.getElementById("my-schedule-btn").addEventListener("click", () => window.location.href = "schedulestudent.html");
-  document.getElementById("my-subject-btn").addEventListener("click", () => window.location.href = "subjectstudent.html");
-  document.getElementById("feedback-btn").addEventListener("click", () => window.location.href = "feedbackstudent.html");
+  document.getElementById("my-subject-btn").addEventListener("click", () => window.location.href = "subjectstudent.php");
+  document.getElementById("feedback-btn").addEventListener("click", () => window.location.href = "feedbackstudent.php");
 });
 </script>
 

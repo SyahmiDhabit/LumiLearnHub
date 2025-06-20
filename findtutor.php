@@ -155,11 +155,11 @@
       });
 
       document.getElementById("my-subject-btn").addEventListener("click", () => {
-        window.location.href = "subjectstudent.html";
+        window.location.href = "subjectstudent.php";
       });
 
       document.getElementById("feedback-btn").addEventListener("click", () => {
-        window.location.href = "feedbackstudent.html";
+        window.location.href = "feedbackstudent.php";
       });
     });
   </script>
