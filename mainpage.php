@@ -33,7 +33,7 @@ include('connection.php');
                 <img src="image/PpLogo.jpg" alt="User Icon" class="social-icon">
             </a>
             <a href="signup.html" class="signup-btn">SIGN UP</a>
-            <a href="tutorlogin.html" class="login-btn">LOG IN</a>
+            <a href="login.html" class="login-btn">LOG IN</a>
         </div>
     </nav>
 </div>
