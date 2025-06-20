@@ -15,30 +15,38 @@
     </div>
   </div>
 
+  <h1>Tutor Login</h1>
+
   <div class="center-wrapper">
     <section>
       <article class="form">
         <form action="logintutor.php" method="post">
-          <div>
-            <p>Username</p>
-            <input type="text" name="tutor_username" required>
-
-            <p>Password</p>
-            <input type="password" name="tutor_password" required>
+          <div class="full-width">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="tutor_username" required>
           </div>
 
-          <div class="status">
+          <div class="full-width">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="tutor_password" required>
+          </div>
+
+          <div class="full-width status">
             <p>I am a Tutor</p>
           </div>
 
-          <div class="form-buttons" style="margin-top: 20px;">
-            <input type="submit" value="Proceed">
-            <a href="mainpage.php" style="margin-left: 20px;">Cancel</a>
+          <div class="full-width form-buttons">
+            <input type="submit" value="Proceed" id="submit">
+            <a href="mainpage.php" class="cancel-link">Cancel</a>
           </div>
         </form>
       </article>
     </section>
   </div>
+
+  <footer>
+    <p class="footer">2025 LumiLearnHub. All rights reserved.</p>
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -50,9 +58,5 @@
       };
     });
   </script>
-
-  <footer>
-    <p class="footer">2025 LumiLearnHub. All rights reserved.</p>
-  </footer>
 </body>
 </html>

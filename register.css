@@ -119,11 +119,15 @@ textarea {
 
 /* Footer */
 footer {
-  background-color: #a55252;
-  color: black;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 20px 20px 0 0;
-  margin-top: 30px;
+    text-align: center;
+    padding: 1rem;
+    background-color: #7e3d3c;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.footer{
+    color: black;
 }
