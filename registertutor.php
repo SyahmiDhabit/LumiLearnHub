@@ -52,6 +52,8 @@ if (
 
         if ($conn->query($sql) === TRUE) {
             echo "<p>Tutor successfully registered!</p>";
+            echo "<p>You will be redirected to the login page in 7 seconds...</p>";
+            echo "<meta http-equiv='refresh' content='7;url=tutorlogin.html'>";
             echo "<table border='1' cellpadding='10'>";
             echo "<tr><th>Field Name</th><th>Value</th></tr>";
             echo "<tr><td>tutor_fullName</td><td>$tutor_fullName</td></tr>";
@@ -65,6 +67,7 @@ if (
             echo "<tr><td>tutor_email</td><td>$tutor_email</td></tr>";
             echo "<tr><td>tutor_bio</td><td>$tutor_bio</td></tr>";
             echo "</table>";
+
         } else {
             echo "<p>Error inserting into database: " . $conn->error . "</p>";
         }
