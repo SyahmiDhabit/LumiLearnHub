@@ -1,96 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Registration</title>
-    <link rel="stylesheet" href="register.css" type="text/css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="register.css" type="text/css" />
 </head>
-
 <body>
-    <div class="bar">
-        <button class="back-btn" onclick="window.location.href='mainpage.php'">← BACK</button>
-        <div class="right-group">
-            <span class="text">Already have an account?</span>
-            <button class="login-btn" onclick="window.location.href='studentlogin.html'">LOG IN</button>
-        </div>
+
+  <div class="bar">
+    <button class="back-btn" onclick="window.location.href='mainpage.php'">← BACK</button>
+    <div class="right-group">
+      <span class="text">Already have an account?</span>
+      <button class="login-btn" onclick="window.location.href='studentlogin.html'">LOG IN</button>
+    </div>
+  </div>
+
+  <h1>ABOUT YOU</h1>
+
+  <form action="registerstudent.php" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="student_fullName">Full Name</label>
+      <input type="text" id="student_fullName" name="student_fullName" placeholder="Your Fullname" required />
     </div>
 
-    <h1>ABOUT YOU</h1>
+    <div>
+      <label for="student_username">Username</label>
+      <input type="text" id="student_username" name="student_username" placeholder="Your Username" required />
+    </div>
 
-    <form action="registerstudent.php" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="student_fullName">Full Name</label>
-            <input type="text" id="student_fullName" name="student_fullName" placeholder="Your Fullname" required>
-        </div>
+    <div>
+      <label for="student_password">Password</label>
+      <input type="password" id="student_password" name="student_password" placeholder="Your Password" required />
+    </div>
 
-        <div>
-            <label for="student_username">Username</label>
-            <input type="text" id="student_username" name="student_username" placeholder="Your Username" required>
-        </div>
+    <div>
+      <label for="student_age">Age</label>
+      <input type="number" id="student_age" name="student_age" placeholder="Your Age" required />
+    </div>
 
-        <div>
-            <label for="student_password">Password</label>
-            <input type="password" id="student_password" name="student_password" placeholder="Your Password" required>
-        </div>
+    <div>
+      <label for="student_dob">Birth Date</label>
+      <input type="date" id="student_dob" name="student_dob" required />
+    </div>
 
-        <div>
-            <label for="student_age">Age</label>
-            <input type="number" id="student_age" name="student_age" placeholder="Your Age" required>
-        </div>
+    <div>
+      <label>Gender</label>
+      <div class="gender-options">
+        <input type="radio" id="student_gendermale" name="student_gender" value="male" />
+        <label for="student_gendermale">Male</label>
+        <input type="radio" id="student_genderfemale" name="student_gender" value="female" />
+        <label for="student_genderfemale">Female</label>
+      </div>
+    </div>
 
-        <div>
-            <label for="student_dob">Birth Date</label>
-            <input type="date" id="student_dob" name="student_dob" required>
-        </div>
+    <div>
+      <label for="student_phoneNumber">Phone Number</label>
+      <input type="tel" id="student_phoneNumber" name="student_phoneNumber" placeholder="+601x-xxxxxxx" required />
+    </div>
 
-        <div>
-            <label>Gender</label>
-            <div class="gender-options">
-                <input type="radio" id="student_gendermale" name="student_gender" value="male">
-                <label for="student_gendermale">Male</label>
-                <input type="radio" id="student_genderfemale" name="student_gender" value="female">
-                <label for="student_genderfemale">Female</label>
-            </div>
-        </div>
+    <div>
+      <label for="student_country">Country</label>
+      <select id="student_country" name="student_country">
+        <option value="malaysia">Malaysia</option>
+        <option value="singapore">Singapore</option>
+        <option value="philippine">Philippine</option>
+        <option value="others">Others</option>
+      </select>
+    </div>
 
-        <div>
-            <label for="student_phoneNumber">Phone Number</label>
-            <input type="tel" id="student_phoneNumber" name="student_phoneNumber" placeholder="+601x-xxxxxxx" required>
-        </div>
+    <div>
+      <label for="student_email">Email</label>
+      <input type="email" id="student_email" name="student_email" placeholder="Your Email" required />
+    </div>
 
-        <div>
-            <label for="student_country">Country</label>
-            <select id="student_country" name="student_country">
-                <option value="malaysia">Malaysia</option>
-                <option value="singapore">Singapore</option>
-                <option value="philippine">Philippine</option>
-                <option value="others">Others</option>
-            </select>
-        </div>
+    <div>
+      <label for="student_bio">Bio</label>
+      <textarea id="student_bio" name="student_bio" placeholder="Tell us about yourself..." required></textarea>
+    </div>
 
-        <div>
-            <label for="student_email">Email</label>
-            <input type="email" id="student_email" name="student_email" placeholder="Your Email" required>
-        </div>
+    <!-- Sticky Submit Button -->
+    <div class="sticky-button full-width">
+      <span>Proceed to register as a Student?</span><br><br>
+      <input type="submit" id="submit" value="PROCEED" />
+    </div>
+  </form>
 
-        <div>
-            <label for="student_bio">Bio</label>
-            <textarea id="student_bio" name="student_bio" placeholder="Tell us about yourself..." required></textarea>
-        </div>
-
-        <div style="text-align: center;">
-            <span>Proceed to register as a Student?</span><br><br>
-            <input type="submit" id="submit" value="PROCEED">
-        </div>
-
-        <div class="form-footer">
-  <button id="submit" type="submit">Submit</button>
-</div>
-    </form>
-</body>
-
-<footer>
+  <footer>
     <p class="footer">2025 LumiLearnHub. All rights reserved.</p>
-</footer>
+  </footer>
+
+</body>
 </html>

@@ -35,6 +35,8 @@ if (
 
     if ($check->num_rows >= 1) {
         echo "<p>The username already exists. Please use a different username.</p>";
+        echo "<p>You will be redirected to the login page in 5 seconds...</p>";
+        echo "<meta http-equiv='refresh' content='5;url=registerstudent.html'>";
     } else {
         $sql = "INSERT INTO student (
             student_fullName, student_username, student_password, student_age, student_dob, student_gender, 
@@ -46,8 +48,8 @@ if (
 
         if ($conn->query($sql) === TRUE) {
             echo "<p>Student successfully registered!</p>";
-            echo "<p>You will be redirected to the login page in 5 seconds...</p>";
-            echo "<meta http-equiv='refresh' content='5;url=studentlogin.html'>";
+            echo "<p>You will be redirected to the login page in 7 seconds...</p>";
+            echo "<meta http-equiv='refresh' content='7;url=studentlogin.html'>";
             echo "<table border='1' cellpadding='10'>";
             echo "<tr><th>Field Name</th><th>Value</th></tr>";
             echo "<tr><td>student_fullName</td><td>$student_fullName</td></tr>";

@@ -63,6 +63,7 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  padding-bottom: 120px; /* Ensure space for sticky button */
 }
 
 /* Full width items */
@@ -113,8 +114,16 @@ textarea {
   border-radius: 15px;
   font-weight: bold;
   cursor: pointer;
-  grid-column: 2;
-  justify-self: end;
+}
+
+/* Sticky Button Container */
+.sticky-button {
+  position: sticky;
+  bottom: 20px;
+  background-color: #873939;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 10;
 }
 
 /* Footer */
