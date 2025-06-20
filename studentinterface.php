@@ -83,7 +83,7 @@ $studentName = $_SESSION['student_fullname'];
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("explore-subject-btn").addEventListener("click", function () {
-      window.location.href = "searchsubject.html";
+      window.location.href = "searchsubject.php";
     });
 
     document.getElementById("find-tutor-btn").addEventListener("click", function () {
