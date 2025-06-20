@@ -1,0 +1,156 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #7f4e4e;
+  padding-bottom: 80px;
+   margin: 0; /* Add this */
+  padding-top: 0; /* Optional, to be safe */
+}
+
+/* Top Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #AC5656;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.navleft h1 {
+    margin: 0;
+    font-size: 24px;
+    background-color: aliceblue;
+    color: black;
+    padding: 10px 10px;
+    border-radius: 30px;
+}
+.navcenter h1 {
+    margin: 0;
+    font-size: 24px;
+    color: white;
+    font-weight: bolder;
+    font-size: 30px;
+}
+.navright  {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  
+}
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+}
+
+.firstMenu {
+   position: absolute;
+  top: 94px;        /* adjust as needed */
+  left: 100px;        /* distance from left side */ 
+}
+
+.firstMenu ul {
+  list-style: none;      /* remove bullets */
+  padding: 15px;
+  display: flex;         /* horizontal layout */
+  justify-content: center; /* center items (optional) */
+}
+
+.firstMenu li {
+  display: inline-block;
+}
+
+.firstMenu a {
+   display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 900;
+  padding: 70px 35px;     /* consistent vertical and horizontal padding */
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #E97979;
+  line-height: 1.5;   
+}
+
+.firstMenu a:hover {
+  background-color: #621818;
+  color: white;
+}
+
+.Menu ul {
+  list-style: none;      /* remove bullets */
+  padding: 15px;
+  margin-left: 200px;
+  margin-top: 37px;
+  display: flex;         /* horizontal layout */
+  justify-content: center; /* center items (optional) */
+  gap: 50px;             /* space between items */
+}
+
+.Menu li {
+  display: inline-block;
+}
+
+.Menu a {
+  text-decoration: none;
+  color: black;
+  font-weight: 900;
+  padding: 20px 60px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #E97979;
+}
+
+.Menu a:hover {
+  background-color: #621818;
+  color: white;
+}
+
+.container {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 60px;
+      margin-left: 210px;
+    }
+
+    .card-box-tutor {
+      background-color: #A14C4C;
+      padding: 8px 47px;
+      margin-right: 30px;
+      border-radius: 10px;
+      width: 350px;
+    }
+    .card-box-student {
+      background-color: #A14C4C;
+      padding: 8px 60px;
+      margin-right: 38px;
+      border-radius: 10px;
+      width: 350px;
+    }
+
+    h2 {
+      color: aliceblue;
+    }
+
+    .user-card {
+      display: flex;
+      align-items: center;
+      background-color: #B35656;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    .user-card img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-name {
+      font-size: 14px;
+      color: #FFF;
+    }
