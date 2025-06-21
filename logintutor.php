@@ -1,32 +1,42 @@
 <?php
 session_start();
-include 'connection.php'; // sambung database
+include 'connection.php'; // Connect to DB
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize input
-    $username = trim($_POST['tutor_username']);
-    $password = $_POST['tutor_password'];
+    $username = trim($_POST['tutor_username'] ?? '');
+    $password = $_POST['tutor_password'] ?? '';
 
-    // Prepared statement untuk elak SQL injection
+    // Check for empty fields
+    if (empty($username) || empty($password)) {
+        echo "<script>
+                alert('Please enter both username and password.');
+                window.location.href = 'tutorlogin.html';
+              </script>";
+        exit();
+    }
+
+    // Prepare statement to avoid SQL injection
     $stmt = $conn->prepare("SELECT * FROM tutor WHERE tutor_username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Semak jika akaun wujud
+    // Validate account
     if ($result && $result->num_rows === 1) {
         $row = $result->fetch_assoc();
 
-        // Semak password
+        // Verify password
         if (password_verify($password, $row['tutor_password'])) {
-            // Simpan username dalam session
+            // Store tutor info in session
+            $_SESSION['tutor_id'] = $row['tutorID'];
             $_SESSION['tutor_username'] = $row['tutor_username'];
+            $_SESSION['tutor_fullname'] = $row['tutor_fullName'];
 
-            // Redirect ke interface
+            // Redirect to tutor interface
             header("Location: tutorinterface.php");
             exit();
         } else {
-            // Password salah
             echo "<script>
                     alert('Incorrect password. Please try again.');
                     window.location.href = 'tutorlogin.html';
@@ -34,19 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } else {
-        // Akaun tiada
         echo "<script>
                 alert('Account not found. Please register first.');
                 window.location.href = 'tutorlogin.html';
               </script>";
         exit();
     }
-} else {
-    // Akses tidak sah
-    echo "<script>
-            alert('Invalid access.');
-            window.location.href = 'tutorlogin.html';
-          </script>";
-    exit();
+
+    $stmt->close();
 }
+$conn->close();
 ?>
