@@ -2,12 +2,12 @@
 session_start();
 require('connection.php');
 
-if (!isset($_SESSION['student_id'])) {
+if (!isset($_SESSION['studentID'])) {
     header("Location: studentlogin.html");
     exit();
 }
-$studentID = $_SESSION['student_id'];
-$studentFullname = $_SESSION['student_fullname'];
+$studentID = $_SESSION['studentID'];
+$studentFullname = $_SESSION['student_fullName'];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $studentFullname = $_SESSION['student_fullname'];
       <span>Find a Tutor</span>
     </div>
     <div class="button">
-      <img src="image/feedbackicon.png" alt="Feedback">
+      <img src="image/viewfeedback.png" alt="View Feedback">
       <span>View Feedback</span>
     </div>
   </div>

@@ -2,10 +2,6 @@
 session_start();
 require('connection.php');
 
-if (!isset($_SESSION['student_id'])) {
-    header("Location: studentlogin.html");
-    exit();
-}
 $studentFullname = $_SESSION['student_fullname'];
 ?>
 
@@ -26,17 +22,17 @@ $studentFullname = $_SESSION['student_fullname'];
 
   <div class="welcome-section">
     <h1 class="welcome-title">WELCOME STUDENT: <?= htmlspecialchars($studentFullname) ?>!</h1>
-    <p class="description">We’re excited to have you here...</p>
+    <p class="description">We’re excited to have you here. This is your space to explore, learn, and grow at your own pace. You can find the right tutors, book sessions that suit your schedule, and keep track of your learning progress all in one convenient place. Whether you're brushing up on a subject or aiming for top scores, LumiLearnHub is here to support every step of your journey. Let’s make the most of your time here and reach your goals together!</p>
   </div>
 
   <div class="button-group">
     <button><img src="image/subject.png" style="width: 20px; margin-right: 8px;">Explore Subject</button>
     <button><img src="image/findtutor.png" style="width: 20px; margin-right: 8px;">Find a Tutor</button>
-    <button><img src="image/toptutor.png" style="width: 20px; margin-right: 8px;">Top Tutors</button>
+    <button><img src="image/viewfeedback.png" style="width: 20px; margin-right: 8px;">View Feedback</button>
   </div>
 
   <div class="main-content">
-    <div class="table-section">
+    <div class="table-section >
       <table class="subject-table">
         <thead>
           <tr>

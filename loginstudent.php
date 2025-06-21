@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (password_verify($student_password, $student['student_password'])) {
             $_SESSION['studentID'] = $student['studentID'];
-            $_SESSION['student_fullname'] = $student['student_fullName'];
+            $_SESSION['student_fullName'] = $student['student_fullName'];
             header("Location: studentinterface.php");
             exit();
         } else {

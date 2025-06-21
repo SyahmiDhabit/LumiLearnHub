@@ -44,8 +44,8 @@ $studentFullname = $_SESSION['student_fullname'];
     Find a Tutor
   </button>
   <button class="btn" id="top-tutors-btn">
-    <img src="image/toptutor.png" alt="Top Tutors" style="width: 20px; vertical-align: middle; margin-right: 5px;">
-    Top Tutors
+    <img src="image/viewfeedback.png" alt="View Feedback" style="width: 20px; vertical-align: middle; margin-right: 5px;">
+    View Feedback
   </button>
   </div>
 

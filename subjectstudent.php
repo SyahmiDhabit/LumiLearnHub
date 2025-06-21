@@ -1,11 +1,12 @@
 <?php
 session_start();
+include"connection.php";
 if (!isset($_SESSION['studentID'])) {
   header("Location: studentlogin.html");
   exit();
 }
 $studentID = $_SESSION['studentID'];
-$studentFullname = $_SESSION['student_fullname'];
+$studentFullname = $_SESSION['student_fullName'];
 ?>
 
 <!DOCTYPE html>
@@ -27,22 +28,36 @@ $studentFullname = $_SESSION['student_fullname'];
   <div class="welcome-section">
     <h1 class="welcome-title">WELCOME STUDENT: <?= htmlspecialchars($studentFullname) ?>!</h1>
     <p class="description">
-      We’re excited to have you here. This is your space to explore, learn, and grow at your own pace.
+      We're excited to have you here. This is your space to explore, learn, and grow at your own pace. 
+      You can find the right tutors, book sessions that suit your schedule, and keep track of your learning 
+      progress all in one convenient place. Whether you're brushing up on a subject or aiming for top scores, 
+      LumiLearnHub is here to support every step of your journey. Let's make the most of your time here and 
+      reach your goals together!
     </p>
   </div>
 
   <div class="button-group">
-    <button id="explore-subject-btn"><img src="image/subject.png" /> Explore Subject</button>
-    <button id="find-tutor-btn"><img src="image/findtutor.png" /> Find a Tutor</button>
-    <button id="top-tutors-btn"><img src="image/toptutor.png" /> Top Tutors</button>
+    <button>
+      <img src="image/subject.png" alt="Subject" /> Explore Subject
+    </button>
+    <button>
+      <img src="image/findtutor.png" alt="Add Tutor" /> Find a Tutor
+    </button>
+    <button>
+      <img src="image/viewfeedback.png" alt="View Feedback" /> View Feedback
+    </button>
   </div>
 
   <div class="subject-section">
-    <h2>My Subjects</h2>
+    <h2> My Subjects </h2>
     <div style="max-height: 180px; overflow-y: auto; width: 80%;">
       <table id="subject-table">
         <thead>
-          <tr><th>No</th><th>Subject</th><th>Tutor</th></tr>
+          <tr>
+            <th>No</th>
+            <th>Subject</th>
+            <th>Tutor</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
@@ -50,28 +65,57 @@ $studentFullname = $_SESSION['student_fullname'];
   </div>
 
   <div class="right-buttons">
-    <div class="right-button" id="schedule-btn"><img src="image/calendaricon.png"><span>My Schedule</span></div>
-    <div class="right-button" id="subject-btn"><img src="image/subject.png"><span>My Subject</span></div>
-    <div class="right-button" id="feedback-btn"><img src="image/feedbackicon.png"><span>Feedback</span></div>
+    <div class="right-button">
+      <img src="image/calendaricon.png" alt="My Schedule">
+      <span>My Schedule</span>
+    </div>
+    <div class="right-button">
+      <img src="image/subject.png" alt="My Subject">
+      <span>My Subject</span>
+    </div>
+    <div class="right-button">
+      <img src="image/feedbackicon.png" alt="Feedback">
+      <span>Feedback</span>
+    </div>
   </div>
 
-  <footer>2025 LumiLearnHub. All rights reserved</footer>
+  <footer>
+    2025 LumiLearnHub. All rights reserved
+  </footer>
 
-<script>
-$(function() {
-  // Navigation bindings
-  $(".back-button").click(() => location.href = "studentinterface.php");
-  $(".user-top-icon").click(() => location.href = "profile2.html");
-  $("#explore-subject-btn").click(() => location.href = "searchsubject.php");
-  $("#find-tutor-btn").click(() => location.href = "findtutor.php");
-  $("#top-tutors-btn").click(() => location.href = "toptutors.php");
-  $("#schedule-btn").click(() => location.href = "schedulestudent.php");
-  $("#subject-btn").click(() => location.href = "subjectstudent.php");
-  $("#feedback-btn").click(() => location.href = "feedbackstudent.php");
+  <script>
+    $(document).ready(function () {
+  // Navigation button actions using jQuery
+  $(".back-button").on("click", function () {
+    window.location.href = "studentinterface.php";
+  });
 
-  // Load subjects via AJAX
-  $.getJSON("get_student_subjects.php", function(data) {
-    console.log("Fetched data:", data); // for debugging
+  $(".user-top-icon").on("click", function () {
+    window.location.href = "profile2.html";
+  });
+
+  $(".button-group button:eq(0)").on("click", function () {
+    window.location.href = "searchsubject.php";
+  });
+
+  $(".button-group button:eq(1)").on("click", function () {
+    window.location.href = "findtutor.php";
+  });
+
+  $(".button-group button:eq(2)").on("click", function () {
+    window.location.href = "toptutors.php";
+  });
+
+  $(".right-button:eq(0)").on("click", function () {
+    window.location.href = "schedulestudent.php";
+  });
+
+  $(".right-button:eq(2)").on("click", function () {
+    window.location.href = "feedbackstudent.php";
+  });
+
+  // Load subject and tutor from DB
+  $.getJSON("get_student_subjects.php", function (data) {
     const tbody = $("#subject-table tbody").empty();
 
     if (!Array.isArray(data) || data.length === 0 || data.error) {
@@ -79,22 +123,30 @@ $(function() {
       return;
     }
 
-    data.forEach((row, index) => {
-      // Ensure field names are correct
+    data.forEach(function (row, index) {
       const subject = row.subject_name || "N/A";
-      const tutor = row.tutor_fullName || "N/A";
+      const tutor = row.tutor_fullName || "Not assigned yet";
+      const subjectID = row.subjectID;
 
       tbody.append(
-        "<tr>" +
+        "<tr data-subject-id='" + subjectID + "'>" +
           "<td>" + (index + 1) + "</td>" +
           "<td>" + subject + "</td>" +
           "<td>" + tutor + "</td>" +
         "</tr>"
       );
     });
-  }).fail((jqXHR, textStatus, errorThrown) => {
+
+    // Optional row click action
+    $("#subject-table tbody").on("click", "tr", function () {
+      const subjectID = $(this).data("subject-id");
+      console.log("Clicked subject ID:", subjectID);
+    });
+  })
+  .fail(function (jqXHR, textStatus, errorThrown) {
     console.error("AJAX Error:", textStatus, errorThrown);
-    alert("Failed to load subject data. Please check your database connection.");
+    console.log("Response text:", jqXHR.responseText);
+    alert("Failed to load subject data. Please check your connection.");
   });
 });
 </script>
