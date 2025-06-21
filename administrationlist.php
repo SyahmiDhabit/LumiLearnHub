@@ -10,7 +10,7 @@ $students = $conn->query("SELECT * FROM student");
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="administrationinterface.css" type="text/css" />
+    <link rel="stylesheet" href="administrationlist.css" type="text/css" />
 
 </head>
 <body>
@@ -33,15 +33,15 @@ $students = $conn->query("SELECT * FROM student");
 <!-- Navigation -->
  <div class = "firstMenu">
         <ul>
-            <li><a href="login.html">TUTORING <br>SUBJECT <br> APPLICATION</a></li>
+            <li><a href="applicationadministration.php">TUTORING <br>SUBJECT <br> APPLICATION</a></li>
         </ul>
     </div>
 
     <div class="Menu">
          <ul>
-                <li><a href="signup.html">FEEDBACK</a></li>
-                <li><a href="login.html">USER</a></li>
-                <li><a href="login.html" id="home">HOME</a></li>
+                <li><a href="feedbackadministration.php">FEEDBACK</a></li>
+                <li><a href="reportadministration.php">REPORT</a></li>
+                <li><a href="administrationlist.php" id="home">LIST</a></li>
                 <li><a href="mainpage.php">LOGOUT</a></li>
          </ul>
         </div> 

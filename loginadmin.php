@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($admin_password, $admin['admin_password'])) {
             $_SESSION['admin_id'] = $admin['adminID'];
             $_SESSION['admin_username'] = $admin['admin_username'];
-            header("Location: administrationinterface.php");
+            header("Location: reportadministration.php");
             exit();
         } else {
             echo "<!DOCTYPE html>
