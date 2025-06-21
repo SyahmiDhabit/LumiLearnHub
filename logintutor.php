@@ -18,8 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result && $result->num_rows === 1) {
         $row = $result->fetch_assoc();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
         // Semak password
         if (password_verify($password, $row['tutor_password'])) {
             // Simpan username dalam session
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert('Account not found. Please register first.');
                 window.location.href = 'tutorlogin.html';
               </script>";
-=======
+
         // Semak kata laluan menggunakan password_verify
         if (password_verify($tutor_password, $user['tutor_password'])) {
             // Simpan tutorID dalam sesi
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: tutorinterface.php");
             exit();
         } else {
-=======
+
         // Semak kata laluan menggunakan password_verify
         if (password_verify($tutor_password, $user['tutor_password'])) {
             // Simpan tutorID dalam sesi
@@ -64,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: tutorinterface.php");
             exit();
         } else {
->>>>>>> Stashed changes
+
             echo "<p style='color:red;'>Incorrect password.</p>";
             header("refresh:3; url=tutorlogin.html");
             exit();
@@ -72,15 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "<p style='color:red;'>Username not found.</p>";
         header("refresh:3; url=tutorlogin.html");
->>>>>>> Stashed changes
+
         exit();
     }
-} else {
-    // Akses tidak sah
-    echo "<script>
-            alert('Invalid access.');
-            window.location.href = 'tutorlogin.html';
-          </script>";
-    exit();
-}
+} }
 ?>
