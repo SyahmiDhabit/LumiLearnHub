@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['student_fullname'])) {
+  header("Location: studentlogin.html"); 
+  exit();
+}
+$studentFullname = $_SESSION['student_fullname'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +24,7 @@
   </div>
     
     <div class="welcome-section">
-    <h1 class="welcome-title">WELCOME STUDENT!</h1>
+    <h1 class="welcome-title">WELCOME STUDENT: <?php echo htmlspecialchars($studentFullname); ?>!</h1>
     <p class="description">
       We’re excited to have you here. This is your space to explore, learn, and grow at your own pace.
       You can find the right tutors, book sessions that suit your schedule, and keep track of your learning progress all in one convenient place.
@@ -184,8 +193,8 @@
   document.querySelector(".back-button").addEventListener("click", () => window.location.href = "studentinterface.php");
   document.querySelector(".user-top-icon").addEventListener("click", () => window.location.href = "profile2.html");
   document.getElementById("find-tutor-btn").addEventListener("click", () => window.location.href = "findtutor.php");
-  document.getElementById("top-tutors-btn").addEventListener("click", () => window.location.href = "toptutors.html");
-  document.getElementById("my-schedule-btn").addEventListener("click", () => window.location.href = "schedulestudent.html");
+  document.getElementById("top-tutors-btn").addEventListener("click", () => window.location.href = "toptutors.php");
+  document.getElementById("my-schedule-btn").addEventListener("click", () => window.location.href = "schedulestudent.php");
   document.getElementById("my-subject-btn").addEventListener("click", () => window.location.href = "subjectstudent.php");
   document.getElementById("feedback-btn").addEventListener("click", () => window.location.href = "feedbackstudent.php");
 });

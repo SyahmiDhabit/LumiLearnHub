@@ -1,5 +1,6 @@
 <?php
 session_start();
+include ("connection.php");
 
 // Check if the student is logged in
 if (!isset($_SESSION['student_id'])) {
@@ -91,7 +92,7 @@ $studentName = $_SESSION['student_fullname'];
     });
 
     document.getElementById("top-tutors-btn").addEventListener("click", function () {
-      window.location.href = "toptutors.html";
+      window.location.href = "toptutors.php";
     });
 
     document.getElementById("tutor-request-btn").addEventListener("click", function () {
@@ -103,7 +104,7 @@ $studentName = $_SESSION['student_fullname'];
     });
 
     document.getElementById("my-schedule-btn").addEventListener("click", function () {
-      window.location.href = "schedulestudent.html";
+      window.location.href = "schedulestudent.php";
     });
 
     document.getElementById("my-subject-btn").addEventListener("click", function () {

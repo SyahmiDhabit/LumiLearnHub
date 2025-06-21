@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $student = $result->fetch_assoc();
 
         if (password_verify($student_password, $student['student_password'])) {
-            $_SESSION['student_id'] = $student['studentID'];
+            $_SESSION['studentID'] = $student['studentID'];
             $_SESSION['student_fullname'] = $student['student_fullName'];
             header("Location: studentinterface.php");
             exit();

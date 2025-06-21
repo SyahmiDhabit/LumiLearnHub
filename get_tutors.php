@@ -1,4 +1,5 @@
 <?php
+// get_tutors.php
 $host = "localhost";
 $user = "root";
 $pass = "1234";
@@ -6,24 +7,42 @@ $dbname = "student_lumilearn";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  http_response_code(500);
+  die(json_encode(["error" => "Database connection failed."]));
 }
 
-$sql = "SELECT t.tutorID, t.tutor_fullName, ts.subjectID, ts.duration, ts.qualification, ts.level
-        FROM tutor_subject ts
-        JOIN tutor t ON t.tutorID = ts.tutorID";
+$sql = "
+  SELECT
+    t.tutorID,
+    t.tutor_fullName,
+    ts.subjectID,
+    s.subject_name,
+    ts.duration,
+    ts.qualification,
+    ts.level
+  FROM tutor t
+  LEFT JOIN tutor_subject ts ON t.tutorID = ts.tutorID
+  LEFT JOIN subject s ON ts.subjectID = s.subjectID
+  ORDER BY t.tutor_fullName
+";
 
 $result = $conn->query($sql);
+if (!$result) {
+  http_response_code(500);
+  die(json_encode(["error" => "Query failed: " . $conn->error]));
+}
 
 $tutors = [];
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $tutors[] = $row;
-  }
+while ($row = $result->fetch_assoc()) {
+  $row['subjectID']      = $row['subjectID']      ?? null;
+  $row['subject_name']   = $row['subject_name']   ?? null;
+  $row['duration']       = $row['duration']       ?? null;
+  $row['qualification']  = $row['qualification']  ?? null;
+  $row['level']          = $row['level']          ?? null;
+  $tutors[] = $row;
 }
 
 header('Content-Type: application/json');
 echo json_encode($tutors);
 
 $conn->close();
-?>

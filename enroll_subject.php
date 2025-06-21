@@ -1,13 +1,20 @@
 <?php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['subjectID'])) {
     $subjectID = $_POST['subjectID'];
+
+    // Get the logged-in student ID from session
+    if (!isset($_SESSION['studentID'])) {
+        echo "Error: Student not logged in.";
+        exit;
+    }
+    $studentID = $_SESSION['studentID'];
 
     $conn = new mysqli("localhost", "root", "1234", "student_lumilearn");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $studentID = ""; // Replace with dynamic student ID if using sessions
     $enrollmentDate = date('Y-m-d'); // today's date
     $status = "Enrolled"; // or any appropriate status value
 
