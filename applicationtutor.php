@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+// Semak jika tutorID wujud dalam sesi
+if (!isset($_SESSION['tutor_id'])) {
+    header("Location: tutorlogin.html");
+    exit();
+}
+
+// Ambil data tutor daripada sesi
+$tutorID = $_SESSION['tutor_id'];
+$tutorFullname = $_SESSION['tutor_fullname'];
+
+// Sambung ke pangkalan data untuk mendapatkan subjek
+include 'connection.php';
+$query = "SELECT subjectID, subject_name FROM subject";
+$result = $conn->query($query);
+$subjects = [];
+
+if ($result->num_rows > 0) {
+    // Ambil subjek dari pangkalan data
+    while ($row = $result->fetch_assoc()) {
+        $subjects[] = $row;
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +37,15 @@
 </head>
 <body>
 <div class="header">
-  <a href="tutorinterface.html" class="brand">LumiLearnHub</a>
-  <div class="welcome">WELCOME TUTOR!</div>
-  <a href="profile.html">
-    <div class="profile-icon"></div>
-  </a>
+  <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
+  <!-- Display Tutor Name in Uppercase -->
+  <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
+  <div class="profile-icon"></div>
 </div>
 
 <div class="container">
   <div class="sidebar">
     <div class="menu-title">MENU OPTION</div>
-
     <a href="scheduletutor.html" class="menu-item">
       <span>My Schedule</span>
       <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
@@ -44,26 +71,36 @@
   <div class="main-content">
     <div class="top-buttons">
       <a href="availabletutor.html"><button class="top-btn">Availability</button></a>
-      <a href="applicationtutor.html"><button class="top-btn selected">Application for Subject Tutoring</button></a>
+      <a href="applicationtutor.php"><button class="top-btn selected">Application for Subject Tutoring</button></a>
     </div>
 
     <section class="application-form">
       <h2>Application for Subject Tutoring</h2>
 
       <form method="POST" action="submitapplication.php">
-        <!-- Subject -->
+        <!-- Subject Dropdown (ComboBox) -->
         <div class="form-group">
           <label for="subject">Subject:</label>
-          <input type="text" id="subject" name="subject" class="form-control" required />
+          <select id="subject" name="subject" class="form-control" required>
+            <?php
+            if (!empty($subjects)) {
+                foreach ($subjects as $subject) {
+                    echo "<option value='" . $subject['subjectID'] . "'>" . $subject['subject_name'] . "</option>";
+                }
+            } else {
+                echo "<option value=''>No subjects available</option>";
+            }
+            ?>
+          </select>
         </div>
 
         <!-- Level -->
         <div class="form-group">
           <label for="level">Level:</label>
           <select id="level" name="level" class="form-control" required>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
+            <option value="Primary School">Primary School</option>
+            <option value="Secondary School">Secondary School</option>
+            <option value="SPM">SPM</option>
           </select>
         </div>
 
@@ -83,6 +120,9 @@
           <label for="qualification">Qualification:</label>
           <textarea id="qualification" name="qualification" class="form-control" rows="5" required></textarea>
         </div>
+
+        <!-- Hidden tutorID field -->
+        <input type="hidden" name="tutorID" value="<?php session_start(); echo $_SESSION['tutor_id']; ?>">
 
         <button type="submit" class="apply-btn">APPLY</button>
       </form>
