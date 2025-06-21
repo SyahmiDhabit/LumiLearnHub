@@ -9,14 +9,12 @@ $studentListQuery = "
     SELECT 
         f.studentID, 
         s.student_fullName AS studentName,
-        AVG(f.rate) AS avgRating,
         COUNT(f.feedbackID) AS feedbackCount
     FROM feedback f
     JOIN student s ON f.studentID = s.studentID
     GROUP BY f.studentID, s.student_fullName
     ORDER BY s.student_fullName ASC
 ";
-
 
 $studentListResult = mysqli_query($conn, $studentListQuery);
 
@@ -73,7 +71,7 @@ if ($selectedStudentID > 0) {
 .student-list a {
     display: block;
     padding: 0.5rem 0;
-    color:rgb(223, 226, 56);
+    color: rgb(223, 226, 56);
     text-decoration: none;
     border-bottom: 1px solid #eee;
 }
@@ -83,6 +81,10 @@ if ($selectedStudentID > 0) {
 .student-list .selected {
     font-weight: bold;
     color: #003366;
+}
+.student-list .feedback-meta {
+    font-size: 0.9em;
+    color: white;
 }
 .feedback-details {
     flex: 2;
@@ -104,7 +106,7 @@ if ($selectedStudentID > 0) {
 }
 .feedback-rate {
     font-weight: bold;
-    color:rgb(233, 197, 101);
+    color: rgb(233, 197, 101);
 }
 .feedback-date {
     font-size: 0.85rem;
@@ -150,9 +152,8 @@ if ($selectedStudentID > 0) {
         <?php foreach ($studentsArray as $student) : ?>
             <a href="?studentID=<?= $student['studentID'] ?>" 
                class="<?= $selectedStudentID == $student['studentID'] ? 'selected' : '' ?>">
-               <?= htmlspecialchars($student['studentName']) ?> 
-               (Avg Rating: <?= number_format($student['avgRating'], 2) ?>, 
-                Feedbacks: <?= $student['feedbackCount'] ?>)
+               <?= htmlspecialchars($student['studentName']) ?><br>
+               <span class="feedback-meta">Feedbacks: <?= $student['feedbackCount'] ?></span>
             </a>
         <?php endforeach; ?>
     </div>
