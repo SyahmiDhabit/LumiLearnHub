@@ -46,7 +46,7 @@ $conn->close();
 <div class="container">
   <div class="sidebar">
     <div class="menu-title">MENU OPTION</div>
-    <a href="scheduletutor.html" class="menu-item">
+    <a href="scheduletutor.php" class="menu-item">
       <span>My Schedule</span>
       <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
     </a>
@@ -54,25 +54,17 @@ $conn->close();
       <span>My Student</span>
       <img src="image/usericon.png" alt="user icon" class="menu-icon">
     </a>
-    <a href="remindertutor.html" class="menu-item">
-      <span>Reminder</span>
-      <img src="image/clockicon.png" alt="clock icon" class="menu-icon">
-    </a>
-    <a href="requeststudenttutor.html" class="menu-item">
-      <span>Student Request</span>
-      <img src="image/requesticon.png" alt="request icon" class="menu-icon">
-    </a>
     <a href="feedbacktutor.html" class="menu-item">
       <span>Feedback</span>
       <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon">
     </a>
+    <a href="applicationtutor.php" class="menu-chosen">
+        <span>Subject Tutoring Request</span>
+      <img src="image/requesticon.png" alt="request icon" class="menu-icon">
+    </a>
   </div>
 
   <div class="main-content">
-    <div class="top-buttons">
-      <a href="availabletutor.html"><button class="top-btn">Availability</button></a>
-      <a href="applicationtutor.php"><button class="top-btn selected">Application for Subject Tutoring</button></a>
-    </div>
 
     <section class="application-form">
       <h2>Application for Subject Tutoring</h2>
