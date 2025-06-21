@@ -61,7 +61,7 @@ $studentFullname = $_SESSION['student_fullname'];
 $(function() {
   // Navigation bindings
   $(".back-button").click(() => location.href = "studentinterface.php");
-  $(".user-top-icon").click(() => location.href = "profile2.html");
+  $(".user-top-icon").click(() => location.href = "profilestudent.php");
   $("#explore-subject-btn").click(() => location.href = "searchsubject.php");
   $("#find-tutor-btn").click(() => location.href = "findtutor.php");
   $("#top-tutors-btn").click(() => location.href = "toptutors.php");

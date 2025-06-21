@@ -100,7 +100,7 @@ $studentFullname = $_SESSION['student_fullname'];
       });
 
       document.querySelector(".user-top-icon").addEventListener("click", function () {
-        window.location.href = "profile2.html";
+        window.location.href = "profilestudent.php";
       });
 
       document.getElementById("explore-subject-btn").addEventListener("click", function () {

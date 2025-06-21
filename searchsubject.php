@@ -191,7 +191,7 @@ $studentFullname = $_SESSION['student_fullname'];
 
   // Navigation
   document.querySelector(".back-button").addEventListener("click", () => window.location.href = "studentinterface.php");
-  document.querySelector(".user-top-icon").addEventListener("click", () => window.location.href = "profile2.html");
+  document.querySelector(".user-top-icon").addEventListener("click", () => window.location.href = "profilestudent.php");
   document.getElementById("find-tutor-btn").addEventListener("click", () => window.location.href = "findtutor.php");
   document.getElementById("top-tutors-btn").addEventListener("click", () => window.location.href = "toptutors.php");
   document.getElementById("my-schedule-btn").addEventListener("click", () => window.location.href = "schedulestudent.php");
