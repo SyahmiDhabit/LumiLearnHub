@@ -12,7 +12,7 @@
   <div class="header">
     <div class="brand">LumiLearnHub</div>
     <div class="welcome">WELCOME TUTOR!</div>
-    <div class="profile-icon"></div>
+    <a href="profiletutor.php" class="profile-icon"></a>
   </div>
 
   <div class="container">
