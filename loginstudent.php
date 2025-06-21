@@ -17,24 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result && $result->num_rows === 1) {
         $row = $result->fetch_assoc();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         if (password_verify($student_password, $student['student_password'])) {
-            $_SESSION['studentID'] = $student['studentID'];
+            $_SESSION['student_id'] = $student['studentID'];
             $_SESSION['student_fullname'] = $student['student_fullName'];
-=======
-=======
->>>>>>> Stashed changes
-        // Semak password
-        if (password_verify($password, $row['student_password'])) {
-            // Simpan maklumat dalam session
-            $_SESSION['student_username'] = $row['student_username'];
-
-            // Redirect ke student interface
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             header("Location: studentinterface.php");
             exit();
         } else {
