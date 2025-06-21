@@ -76,7 +76,7 @@ if ($selectedStudentID > 0) {
     border-bottom: 1px solid #eee;
 }
 .student-list a:hover {
-    background: #f0f0f0;
+    background:rgb(224, 125, 217);
 }
 .student-list .selected {
     font-weight: bold;
@@ -190,4 +190,4 @@ if ($selectedStudentID > 0) {
 </div>
 
 </body>
-</html>
+</html>  
