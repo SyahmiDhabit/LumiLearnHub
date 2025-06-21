@@ -23,7 +23,6 @@ include('connection.php');
             <ul>
                 <li><a href="login.html">Find a Tutor</a></li>
                 <li><a href="signup.html">Become a Tutor</a></li>
-                <li><a href="login.html">Top Tutors</a></li>
             </ul>
         </div>
 
