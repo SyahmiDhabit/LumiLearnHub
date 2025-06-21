@@ -25,10 +25,13 @@ $tutorFullname = $_SESSION['tutor_fullname'];
   <div class="header">
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <div class="brand">LumiLearnHub</div>
     <div class="welcome">WELCOME TUTOR!</div>
     <a href="profiletutor.php" class="profile-icon"></a>
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     <a href="tutorinterface.html" class="brand">LumiLearnHub</a>
