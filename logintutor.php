@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $result->fetch_assoc();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Semak password
         if (password_verify($password, $row['tutor_password'])) {
             // Simpan username dalam session
@@ -52,6 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: tutorinterface.php");
             exit();
         } else {
+=======
+        // Semak kata laluan menggunakan password_verify
+        if (password_verify($tutor_password, $user['tutor_password'])) {
+            // Simpan tutorID dalam sesi
+            $_SESSION['tutor_id'] = $user['tutorID'];
+            $_SESSION['tutor_fullname'] = $user['tutor_fullName'];
+
+            // Alihkan ke tutorinterface.php selepas log masuk berjaya
+            header("Location: tutorinterface.php");
+            exit();
+        } else {
+>>>>>>> Stashed changes
             echo "<p style='color:red;'>Incorrect password.</p>";
             header("refresh:3; url=tutorlogin.html");
             exit();
