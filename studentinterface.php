@@ -23,9 +23,9 @@ $studentName = $_SESSION['student_fullName'];
 </head>
 <body>
   <div class="header-bar">
-    <button class="logo">LumiLearnHub</button>
+  <button class="logo">LumiLearnHub</button>
     <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
-  </div>
+</div>
   
   <div class="welcome-section">
     <h1 class="welcome-title">WELCOME STUDENT: <?php echo htmlspecialchars($studentName); ?>!</h1>
@@ -116,7 +116,7 @@ $studentName = $_SESSION['student_fullName'];
     });
 
     document.querySelector(".user-top-icon").addEventListener("click", function () {
-      window.location.href = "profile2.html";
+      window.location.href = "profilestudent.php";
     });
   });
 </script>

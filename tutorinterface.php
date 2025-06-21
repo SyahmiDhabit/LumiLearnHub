@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+// Semak jika tutorID wujud dalam sesi
+if (!isset($_SESSION['tutor_id'])) {
+    // Arahkan ke log masuk jika tiada sesi
+    header("Location: tutorlogin.html");
+    exit();
+}
+
+// Ambil data tutor daripada sesi
+$tutorID = $_SESSION['tutor_id'];
+$tutorFullname = $_SESSION['tutor_fullname'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,43 +22,45 @@
   <link rel="stylesheet" href="tutorinterface.css" />
 </head>
 <body>
-
-
   <div class="header">
-    <div class="brand">LumiLearnHub</div>
-    <div class="welcome">WELCOME TUTOR!</div>
+    <a href="tutorinterface.html" class="brand">LumiLearnHub</a>
+    <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
     <div class="profile-icon"></div>
   </div>
 
   <div class="container">
     <div class="sidebar">
       <div class="menu-title">MENU OPTION</div>
-      <div class="menu-item">
+      <a href="scheduletutor.html" class="menu-item">
         <span>My Schedule</span>
-        <img src="image/calendaricon.png" alt="calender icon" class="menu-icon">
-      </div>
-      <div class="menu-item">
+        <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
+      </a>
+
+      <a href="mystudenttutor.html" class="menu-item">
         <span>My Student</span>
         <img src="image/usericon.png" alt="user icon" class="menu-icon">
-      </div>
-      <div class="menu-item">
+      </a>
+
+      <a href="remindertutor.html" class="menu-item">
         <span>Reminder</span>
         <img src="image/clockicon.png" alt="clock icon" class="menu-icon">
-      </div>
-      <div class="menu-item">
+      </a>
+
+      <a href="requeststudenttutor.html" class="menu-item">
         <span>Student Request</span>
         <img src="image/requesticon.png" alt="request icon" class="menu-icon">
-      </div>
-      <div class="menu-item">
+      </a>
+
+      <a href="feedbacktutor.html" class="menu-item">
         <span>Feedback</span>
-        <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon  ">
-      </div>
+        <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon">
+      </a>
     </div>
 
     <div class="main-content">
       <div class="top-buttons">
-        <button class="top-btn">Availability</button>
-        <button class="top-btn">Application for Subject Tutoring</button>
+        <a href="availabletutor.html"><button class="top-btn">Availability</button></a>
+        <a href="applicationtutor.php"><button class="top-btn">Application for Subject Tutoring</button></a>
       </div>
 
       <div class="content-section">

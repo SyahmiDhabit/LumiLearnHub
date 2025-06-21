@@ -1,8 +1,10 @@
 <?php
-$server = 'localhost:3301';
+
+$server = 'localhost';
 $username = 'root';
-$password = '1234';
-$dbname = 'student_lumilearn';
+$password = '';
+$dbname = 'student_lumilearn1';
+
 
 //Create connection
 $conn = mysqli_connect($server, $username, $password, $dbname);

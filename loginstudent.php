@@ -1,45 +1,55 @@
 <?php
 session_start();
-require('connection.php');
+include 'connection.php'; // Sambung database
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $student_username = trim($_POST['student_username'] ?? '');
-    $student_password = trim($_POST['student_password'] ?? '');
+    // Dapatkan input & sanitize
+    $username = trim($_POST['student_username'] ?? '');
+    $password = $_POST['student_password'] ?? '';
 
-    if (empty($student_username) || empty($student_password)) {
-        echo "<p style='color:red;'>Please enter both username and password.</p>";
+    // Periksa jika medan kosong
+    if (empty($username) || empty($password)) {
+        echo "<script>
+                alert('Please enter both username and password.');
+                window.location.href = 'studentlogin.html';
+              </script>";
         exit();
     }
 
+    // Prepared statement untuk elak SQL injection
     $stmt = $conn->prepare("SELECT * FROM student WHERE student_username = ?");
-    $stmt->bind_param("s", $student_username);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Semak akaun
     if ($result && $result->num_rows === 1) {
-        $student = $result->fetch_assoc();
+        $row = $result->fetch_assoc();
 
-        if (password_verify($student_password, $student['student_password'])) {
-            $_SESSION['studentID'] = $student['studentID'];
-            $_SESSION['student_fullName'] = $student['student_fullName'];
+        // Semak password
+        if (password_verify($password, $row['student_password'])) {
+            // Simpan info pelajar dalam session
+            $_SESSION['student_id'] = $row['studentID'];
+            $_SESSION['student_username'] = $row['student_username'];
+            $_SESSION['student_fullname'] = $row['student_fullName'];
+
+            // Redirect ke student interface
             header("Location: studentinterface.php");
             exit();
         } else {
-            echo "<!DOCTYPE html>
-            <html><head><title>Login Failed</title></head><body>
-            <p style='color:red;'>Incorrect password.</p>
-            <p>Redirecting in 3 seconds...</p>
-            </body></html>";
-            header("refresh:3; url=studentlogin.html");
+            // Password salah
+            echo "<script>
+                    alert('Incorrect password. Please try again.');
+                    window.location.href = 'studentlogin.html';
+                  </script>";
             exit();
         }
     } else {
-        echo "<!DOCTYPE html>
-        <html><head><title>Login Failed</title></head><body>
-        <p style='color:red;'>Username not found.</p>
-        <p>Redirecting in 3 seconds...</p>
-        </body></html>";
-        header("refresh:3; url=studentlogin.html");
+        // Akaun tiada
+        echo "<script>
+                alert('Account not found. Please register first.');
+                window.location.href = 'studentlogin.html';
+              </script>";
         exit();
     }
 

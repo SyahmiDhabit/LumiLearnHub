@@ -66,7 +66,7 @@ $studentFullname = $_SESSION['student_fullname'];
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".back-button").onclick = () => window.location.href = "studentinterface.php";
-    document.querySelector(".user-top-icon").onclick = () => window.location.href = "profile2.html";
+    document.querySelector(".user-top-icon").onclick = () => window.location.href = "profilestudent.php";
     document.querySelector(".button-group button:nth-child(1)").onclick = () => window.location.href = "searchsubject.php";
     document.querySelector(".button-group button:nth-child(2)").onclick = () => window.location.href = "findtutor.php";
     document.querySelector(".button-group button:nth-child(3)").onclick = () => window.location.href = "toptutors.php";
