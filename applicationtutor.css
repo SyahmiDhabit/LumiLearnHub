@@ -70,62 +70,51 @@ body {
   border: 3px solid #e68e8e;
 }
 
+
 .menu-item {
-  background-color: #da6666;
-  padding: 25px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  color: #000;
-  font-weight: bold;
-  text-decoration: none;
+    background-color: #da6666;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
 }
 
+.menu-chosen {
+    background-color: #da6666;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    border: 7px solid #621818;
+}
+
+
 .menu-item:hover {
-  background-color: #f19595;
+    background-color: #f19595;
 }
 
 .menu-icon {
-  margin-left: auto;
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
 }
 
-/* MAIN CONTENT */
 .main-content {
   flex: 1;
   padding: 0 20px;
 }
 
-/* BUTTONS AT THE TOP */
-.top-buttons {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.top-btn {
-  flex: 1;
-  background-color: #d3c9c9;
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  cursor: pointer;
-  font-size: 17px;
-  text-decoration: none;
-}
-
-.top-btn.selected {
-  border: 5px solid #621818;
-  text-decoration: none;
-}
-
-/* FORM SECTION */
 .application-form h2 {
   color: white;
   font-size: 24px;

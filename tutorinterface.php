@@ -23,7 +23,7 @@ $tutorFullname = $_SESSION['tutor_fullname'];
 </head>
 <body>
   <div class="header">
-    <a href="tutorinterface.html" class="brand">LumiLearnHub</a>
+    <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
     <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
     <div class="profile-icon"></div>
   </div>
@@ -31,7 +31,7 @@ $tutorFullname = $_SESSION['tutor_fullname'];
   <div class="container">
     <div class="sidebar">
       <div class="menu-title">MENU OPTION</div>
-      <a href="scheduletutor.html" class="menu-item">
+      <a href="scheduletutor.php" class="menu-item">
         <span>My Schedule</span>
         <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
       </a>
@@ -41,27 +41,20 @@ $tutorFullname = $_SESSION['tutor_fullname'];
         <img src="image/usericon.png" alt="user icon" class="menu-icon">
       </a>
 
-      <a href="remindertutor.html" class="menu-item">
-        <span>Reminder</span>
-        <img src="image/clockicon.png" alt="clock icon" class="menu-icon">
-      </a>
-
-      <a href="requeststudenttutor.html" class="menu-item">
-        <span>Student Request</span>
-        <img src="image/requesticon.png" alt="request icon" class="menu-icon">
-      </a>
-
       <a href="feedbacktutor.html" class="menu-item">
         <span>Feedback</span>
         <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon">
       </a>
+
+      <a href="applicationtutor.php" class="menu-item">
+        <span>Subject Tutoring Request</span>
+        <img src="image/requesticon.png" alt="request icon" class="menu-icon">
+      </a>
+
     </div>
 
     <div class="main-content">
-      <div class="top-buttons">
-        <a href="availabletutor.html"><button class="top-btn">Availability</button></a>
-        <a href="applicationtutor.php"><button class="top-btn">Application for Subject Tutoring</button></a>
-      </div>
+
 
       <div class="content-section">
         <div class="top-tutors">
