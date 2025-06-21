@@ -23,9 +23,11 @@ $studentName = $_SESSION['student_fullname'];
 </head>
 <body>
   <div class="header-bar">
-    <button class="logo">LumiLearnHub</button>
+  <button class="logo">LumiLearnHub</button>
+  <a href="profilestudent.php"> 
     <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
-  </div>
+  </a>
+</div>
   
   <div class="welcome-section">
     <h1 class="welcome-title">WELCOME STUDENT: <?php echo htmlspecialchars($studentName); ?>!</h1>

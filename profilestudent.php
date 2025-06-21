@@ -1,55 +1,71 @@
 <?php
 session_start();
-include 'db_connection.php'; // sambung database
+include 'connection.php'; // sambungan ke database
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize input
-    $username = trim($_POST['student_username'] ?? '');
-    $password = $_POST['student_password'] ?? '';
+// Semak jika pelajar telah login
+if (!isset($_SESSION['student_username'])) {
+    echo "Unauthorized access. Please log in first.";
+    exit;
+}
 
-    // Semak jika input kosong
-    if (empty($username) || empty($password)) {
-        echo "<script>
-                alert('Please enter both username and password.');
-                window.location.href = 'studentlogin.html';
-              </script>";
-        exit();
-    }
+$student_username = $_SESSION['student_username'];
 
-    // Cari student berdasarkan username
-    $stmt = $conn->prepare("SELECT * FROM student WHERE student_username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// Ambil maklumat pelajar dari database
+$sql = "SELECT * FROM student WHERE student_username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $student_username);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Jika wujud
-    if ($result && $result->num_rows === 1) {
-        $student = $result->fetch_assoc();
-
-        // Semak password
-        if (password_verify($password, $student['student_password'])) {
-            $_SESSION['student_id'] = $student['studentID'];
-            $_SESSION['student_username'] = $student['student_username'];
-            $_SESSION['student_fullname'] = $student['student_fullName'];
-
-            // Redirect ke dashboard pelajar
-            header("Location: studentinterface.php");
-            exit();
-        } else {
-            // Password salah
-            echo "<script>
-                    alert('Incorrect password. Please try again.');
-                    window.location.href = 'studentlogin.html';
-                  </script>";
-            exit();
-        }
-    } else {
-        // Username tidak wujud
-        echo "<script>
-                alert('Student account not found. Please sign up first.');
-                window.location.href = 'studentlogin.html';
-              </script>";
-        exit();
-    }
+if ($result && $result->num_rows > 0) {
+    $student = $result->fetch_assoc();
+} else {
+    echo "No data found for this student.";
+    exit;
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="profile.css" type="text/css">
+</head>
+<body>
+    <div class="up-bar"> 
+        <a href="studentinterface.php"><button class="btn-back">BACK TO HOME</button></a>
+    </div>
+
+    <article class="profile-card"> 
+        <div class="left-section"> 
+            <div class="profile-img">
+                <img src="image/DPimage.png" alt="Profile Picture">
+            </div>
+            <p id="username">Username: <?= htmlspecialchars($student['student_username']) ?></p>
+            <p id="age">Age: <?= htmlspecialchars($student['student_age']) ?></p>
+            <p id="country">Country: <?= htmlspecialchars($student['student_country']) ?></p>
+        </div>
+
+        <div class="right-section"> 
+            <div>
+                <img src="image/gear.png" width="50px" alt="Settings">
+                <div>
+                    <p id="fname">Full Name: <?= htmlspecialchars($student['student_fullName']) ?></p>
+                    <p id="dob">Date Of Birth: <?= htmlspecialchars($student['student_dob']) ?></p>
+                    <p id="gender">Gender: <?= htmlspecialchars($student['student_gender']) ?></p>
+                    <p id="phonenumber">Phone Number: <?= htmlspecialchars($student['student_phoneNumber']) ?></p>
+                    <p id="email">Email: <?= htmlspecialchars($student['student_email']) ?></p>
+                    <p id="bio">Bio: <?= htmlspecialchars($student['student_bio']) ?></p>
+
+                    <br>
+                    <a href="studentlogin.html"><button class="btn-logout">LOG OUT</button></a>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+<footer>
+    2025 LumiLearnHub. All rights reserved
+</footer>
+</html>
