@@ -1,5 +1,7 @@
 <?php
-$server = 'localhost';
+
+
+$server = 'localhost:3301';
 $username = 'root';
 $password = '';
 $dbname = 'student_lumilearn';
