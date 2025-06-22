@@ -5,7 +5,7 @@ session_start();
 // Simulate login if needed (for testing)
 $studentID = $_SESSION['studentID'] ?? 3;
 
-$conn = new mysqli("localhost", "root", "1234", "student_lumilearn");
+include("connection.php");
 if ($conn->connect_error) {
     http_response_code(500);
     echo json_encode(["error" => "Database connection failed."]);

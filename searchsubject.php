@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['student_fullname'])) {
+if (!isset($_SESSION['student_fullName'])) {
   header("Location: studentlogin.html"); 
   exit();
 }
-$studentFullname = $_SESSION['student_fullname'];
+$studentFullname = $_SESSION['student_fullName'];
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ $studentFullname = $_SESSION['student_fullname'];
     <img src="image/findtutor.png" alt="Find a Tutor" style="width: 20px; vertical-align: middle; margin-right: 5px;">
     Find a Tutor
   </button>
-  <button class="btn" id="top-tutors-btn">
+  <button class="btn" id="view-feedback-btn">
     <img src="image/viewfeedback.png" alt="View Feedback" style="width: 20px; vertical-align: middle; margin-right: 5px;">
     View Feedback
   </button>
@@ -193,7 +193,7 @@ $studentFullname = $_SESSION['student_fullname'];
   document.querySelector(".back-button").addEventListener("click", () => window.location.href = "studentinterface.php");
   document.querySelector(".user-top-icon").addEventListener("click", () => window.location.href = "profilestudent.php");
   document.getElementById("find-tutor-btn").addEventListener("click", () => window.location.href = "findtutor.php");
-  document.getElementById("top-tutors-btn").addEventListener("click", () => window.location.href = "toptutors.php");
+  document.getElementById("view-feedback-btn").addEventListener("click", () => window.location.href = "viewfeedback.php");
   document.getElementById("my-schedule-btn").addEventListener("click", () => window.location.href = "schedulestudent.php");
   document.getElementById("my-subject-btn").addEventListener("click", () => window.location.href = "subjectstudent.php");
   document.getElementById("feedback-btn").addEventListener("click", () => window.location.href = "feedbackstudent.php");

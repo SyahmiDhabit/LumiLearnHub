@@ -1,6 +1,7 @@
 <?php
 session_start();
-include"connection.php";
+include("connection.php");
+
 if (!isset($_SESSION['studentID'])) {
   header("Location: studentlogin.html");
   exit();
@@ -103,7 +104,7 @@ $studentFullname = $_SESSION['student_fullName'];
   });
 
   $(".button-group button:eq(2)").on("click", function () {
-    window.location.href = "toptutors.php";
+    window.location.href = "viewfeedback.php";
   });
 
   $(".right-button:eq(0)").on("click", function () {

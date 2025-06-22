@@ -3,13 +3,13 @@ session_start();
 include("connection.php");
 
 // Check if the student is logged in
-if (!isset($_SESSION['student_id'])) {
+if (!isset($_SESSION['studentID'])) {
     header("Location: studentlogin.html");
     exit();
 }
 
 // Get student name from session
-$studentName = $_SESSION['student_fullname'];
+$studentName = $_SESSION['student_fullName'];
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ $studentName = $_SESSION['student_fullname'];
   <div class="top-buttons">
     <button id="explore-subject-btn"><img src="image/subject.png" alt=""> Explore Subject</button>
     <button id="find-tutor-btn"><img src="image/findtutor.png" alt=""> Find a Tutor</button>
-    <button id="top-tutors-btn"><img src="image/toptutor.png" alt=""> Top Tutors</button>
+    <button id="view-feedback-btn"><img src="image/viewfeedback.png" alt=""> View Feedback</button>
   </div>
 
   <div class="main-section">
@@ -93,8 +93,8 @@ $studentName = $_SESSION['student_fullname'];
         window.location.href = "findtutor.php";
       });
 
-      document.getElementById("top-tutors-btn").addEventListener("click", function () {
-        window.location.href = "toptutors.php";
+      document.getElementById("view-feedback-btn").addEventListener("click", function () {
+        window.location.href = "viewfeedback.php";
       });
 
       document.getElementById("tutor-request-btn").addEventListener("click", function () {

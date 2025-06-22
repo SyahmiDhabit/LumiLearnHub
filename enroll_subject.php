@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['subjectID'])) {
     }
     $studentID = $_SESSION['studentID'];
 
-    $conn = new mysqli("localhost", "root", "1234", "student_lumilearn");
+    include("connection.php");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

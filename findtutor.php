@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['student_fullname'])) {
+include("connection.php");
+if (!isset($_SESSION['student_fullName'])) {
   header("Location: studentlogin.html"); // Redirect to login if not logged in
   exit();
 }
@@ -156,7 +157,7 @@ $studentFullname = $_SESSION['student_fullName'];
       });
 
       document.getElementById("top-tutors-btn").addEventListener("click", () => {
-        window.location.href = "toptutors.php";
+        window.location.href = "viewfeedback.php";
       });
 
       document.getElementById("my-schedule-btn").addEventListener("click", () => {

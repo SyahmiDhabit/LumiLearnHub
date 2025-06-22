@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 session_start();
-require('connection.php');
+include("connection.php");
 
 if (!isset($_SESSION['student_id'])) {
     echo json_encode(["error" => "Not logged in"]);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('connection.php');
+include("connection.php");
 
 if (!isset($_SESSION['studentID'])) {
     header("Location: studentlogin.html");
@@ -154,7 +154,7 @@ if (selected) {
 
     // Top Tutors Button
     document.querySelector(".button-group button:nth-child(3)").addEventListener("click", function () {
-        window.location.href = "toptutors.php";
+        window.location.href = "viewfeedback.php";
     });
 
     // My Subject Button

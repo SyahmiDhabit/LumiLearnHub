@@ -1,11 +1,6 @@
 <?php
-// get_tutors.php
-$host = "localhost";
-$user = "root";
-$pass = "1234";
-$dbname = "student_lumilearn";
+include("connection.php");
 
-$conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
   http_response_code(500);
   die(json_encode(["error" => "Database connection failed."]));

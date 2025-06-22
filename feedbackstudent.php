@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('connection.php');
+include('connection.php');
 
-$studentFullname = $_SESSION['student_fullname'];
+$studentFullname = $_SESSION['student_fullName'];
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +69,7 @@ $studentFullname = $_SESSION['student_fullname'];
     document.querySelector(".user-top-icon").onclick = () => window.location.href = "profilestudent.php";
     document.querySelector(".button-group button:nth-child(1)").onclick = () => window.location.href = "searchsubject.php";
     document.querySelector(".button-group button:nth-child(2)").onclick = () => window.location.href = "findtutor.php";
-    document.querySelector(".button-group button:nth-child(3)").onclick = () => window.location.href = "toptutors.php";
+    document.querySelector(".button-group button:nth-child(3)").onclick = () => window.location.href = "viewfeedback.php";
 
     // Load feedback data dynamically
     $.getJSON("give_feedbacks.php", function(data) {
