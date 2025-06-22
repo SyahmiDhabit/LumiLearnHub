@@ -2,7 +2,11 @@
 
 $server = 'localhost:3301';
 $username = 'root';
+<<<<<<< HEAD
 $password = '1234';
+=======
+$password = '';
+>>>>>>> c495e0145c6fa7c43d2e09ed6f4f48fa238b7412
 $dbname = 'student_lumilearn';
 
 
