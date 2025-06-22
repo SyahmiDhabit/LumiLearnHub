@@ -3,14 +3,33 @@ session_start();
 
 // Semak jika tutorID wujud dalam sesi
 if (!isset($_SESSION['tutor_id'])) {
-    // Arahkan ke log masuk jika tiada sesi
-    header("Location: tutorlogin.html");
+    header("Location: tutorlogin.php");
     exit();
 }
 
 // Ambil data tutor daripada sesi
 $tutorID = $_SESSION['tutor_id'];
 $tutorFullname = $_SESSION['tutor_fullname'];
+
+// Sambung ke pangkalan data
+include 'connection.php';
+
+// Dapatkan semua subjek daripada table subject
+$query = "SELECT * FROM subject";
+$result = $conn->query($query);
+
+// Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject
+$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ?";
+$stmtApplied = $conn->prepare($queryApplied);
+$stmtApplied->bind_param("i", $tutorID);
+$stmtApplied->execute();
+$appliedSubjectsResult = $stmtApplied->get_result();
+
+// Simpan ID subjek yang sudah dipohon oleh tutor
+$appliedSubjectIDs = [];
+while ($row = $appliedSubjectsResult->fetch_assoc()) {
+    $appliedSubjectIDs[] = $row['subjectID'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,25 +69,34 @@ $tutorFullname = $_SESSION['tutor_fullname'];
         <span>Subject Tutoring Request</span>
         <img src="image/requesticon.png" alt="request icon" class="menu-icon">
       </a>
-
     </div>
 
     <div class="main-content">
-
-
       <div class="content-section">
-        <div class="top-tutors">
-          <h3>Top Tutors</h3>
-          <ul>
-            <li><div class="avatar"></div> Subiyamin bin Sulaiman</li>
-            <li><div class="avatar"></div> Muhammad Sumbul</li>
-            <li><div class="avatar"></div> Saidatul Syuhada</li>
-            <li><div class="avatar"></div> Fakhrul Razi</li>
-            <li><div class="avatar"></div> Felix Zemdegs</li>
-            <li><div class="avatar"></div> Atiqah Lazim</li>
+        <!-- Subject List Section -->
+        <div class="subject-list-container">
+          <h3>Subjects to Apply</h3>
+          <ul class="subject-list">
+            <?php while ($row = $result->fetch_assoc()): ?>
+              <li>
+                <?php if (in_array($row['subjectID'], $appliedSubjectIDs)): ?>
+                  <!-- If applied, show as non-clickable -->
+                  <div class="subject-box applied">
+                    <span class="subject-name"><?php echo $row['subject_name']; ?></span>
+                    <span class="status">Applied</span>
+                  </div>
+                <?php else: ?>
+                  <!-- For available subjects, make them clickable -->
+                  <a href="applicationtutor.php?subjectID=<?php echo $row['subjectID']; ?>" class="subject-box">
+                    <span class="subject-name"><?php echo $row['subject_name']; ?></span>
+                  </a>
+                <?php endif; ?>
+              </li>
+            <?php endwhile; ?>
           </ul>
         </div>
 
+        <!-- Image Section -->
         <div class="qualities">
           <img src="image/goodtutor.jpg" alt="Tutor Qualities Poster" />
         </div>

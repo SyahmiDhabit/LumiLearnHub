@@ -3,7 +3,7 @@ session_start();
 
 // Semak jika tutorID wujud dalam sesi
 if (!isset($_SESSION['tutor_id'])) {
-    header("Location: tutorlogin.html");
+    header("Location: tutorlogin.php");
     exit();
 }
 
@@ -16,12 +16,26 @@ include 'connection.php';
 $query = "SELECT subjectID, subject_name FROM subject";
 $result = $conn->query($query);
 $subjects = [];
+$selectedSubjectID = isset($_GET['subjectID']) ? $_GET['subjectID'] : null; // Ambil subjek yang dipilih dari URL, jika tiada, set null
 
 if ($result->num_rows > 0) {
     // Ambil subjek dari pangkalan data
     while ($row = $result->fetch_assoc()) {
         $subjects[] = $row;
     }
+}
+
+// Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject
+$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ?";
+$stmtApplied = $conn->prepare($queryApplied);
+$stmtApplied->bind_param("i", $tutorID);
+$stmtApplied->execute();
+$appliedSubjectsResult = $stmtApplied->get_result();
+
+// Simpan ID subjek yang sudah dipohon oleh tutor
+$appliedSubjectIDs = [];
+while ($row = $appliedSubjectsResult->fetch_assoc()) {
+    $appliedSubjectIDs[] = $row['subjectID'];
 }
 
 $conn->close();
@@ -38,7 +52,6 @@ $conn->close();
 <body>
 <div class="header">
   <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
-  <!-- Display Tutor Name in Uppercase -->
   <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
   <div class="profile-icon"></div>
 </div>
@@ -65,7 +78,6 @@ $conn->close();
   </div>
 
   <div class="main-content">
-
     <section class="application-form">
       <h2>Application for Subject Tutoring</h2>
 
@@ -75,12 +87,10 @@ $conn->close();
           <label for="subject">Subject:</label>
           <select id="subject" name="subject" class="form-control" required>
             <?php
-            if (!empty($subjects)) {
-                foreach ($subjects as $subject) {
-                    echo "<option value='" . $subject['subjectID'] . "'>" . $subject['subject_name'] . "</option>";
-                }
-            } else {
-                echo "<option value=''>No subjects available</option>";
+            foreach ($subjects as $subject) {
+                $selected = ($subject['subjectID'] == $selectedSubjectID) ? 'selected' : ''; // Setkan subjek yang dipilih
+                $disabled = (in_array($subject['subjectID'], $appliedSubjectIDs)) ? 'disabled' : ''; // Disable applied subjects
+                echo "<option value='" . $subject['subjectID'] . "' $selected $disabled>" . $subject['subject_name'] . "</option>";
             }
             ?>
           </select>
