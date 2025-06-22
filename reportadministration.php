@@ -23,7 +23,6 @@ include 'connection.php';
     </div>
     <div class="navright">
       <a class="userIcon">
-        <img src="image/PpLogo.jpg" alt="User Icon" class="social-icon">
       </a>
     </div>
   </nav>

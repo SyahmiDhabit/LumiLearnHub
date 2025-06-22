@@ -3,7 +3,7 @@
 $server = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'lumilearn';
+$dbname = 'student_lumilearn';
 
 
 //Create connection
