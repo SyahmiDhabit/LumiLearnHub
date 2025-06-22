@@ -45,8 +45,10 @@ $result = $conn->query($feedbackQuery);
   <div class="header">
     <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
     <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
-    <div class="profile-icon"></div>
-  </div>
+    <a href="profiletutor.php">
+     <div class="profile-icon"></div>
+      </a>  
+    </div>  </div>
 
   <div class="container">
     <div class="sidebar">
