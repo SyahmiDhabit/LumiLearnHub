@@ -1,13 +1,11 @@
 <?php
 session_start();
-include 'connection.php'; // Connect to DB
+include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize input
     $username = trim($_POST['student_username'] ?? '');
     $password = $_POST['student_password'] ?? '';
 
-    // Check for empty fields
     if (empty($username) || empty($password)) {
         echo "<script>
                 alert('Please enter both username and password.');
@@ -16,24 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Prepare statement to avoid SQL injection
+    // Prepare and bind
     $stmt = $conn->prepare("SELECT * FROM student WHERE student_username = ?");
-    $stmt->bind_param("s", $student_username);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Validate account
     if ($result && $result->num_rows === 1) {
         $student = $result->fetch_assoc();
 
-        // Verify password
-        if (password_verify($password, $row['student_password'])) {
-            // Store student info in session
-            $_SESSION['studentID'] = $row['studentID'];
-            $_SESSION['student_username'] = $row['student_username'];
-            $_SESSION['student_fullName'] = $row['student_fullName'];
+        // Plaintext password match (use password_verify if using hashing)
+        if (password_verify($password, $student['student_password'])) {
+            $_SESSION['studentID'] = $student['studentID'];
+            $_SESSION['student_username'] = $student['student_username'];
+            $_SESSION['student_fullName'] = $student['student_fullName'];
 
-            // Redirect to student interface
             header("Location: studentinterface.php");
             exit();
         } else {
