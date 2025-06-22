@@ -185,14 +185,25 @@ input[type="text"] {
   border-radius: 30px;
 }
 
+.card-box-tutor,
+.card-box-student {
+  background-color: #A14C4C;
+  padding: 30px 40px;        /* increase padding around white box */
+  border-radius: 30px;
+  min-width: 380px;          /* make red box at least wider than white box */
+}
+
 .tutor-list,
 .student-list {
-  max-height: 300px; /* Adjust height as needed */
+  max-height: 400px;         /* taller list */
+  width: 300px;              /* wider white box */
   overflow-y: auto;
-  background-color: aliceblue;
-  width: 220px;
-
+  background-color: #fff;    /* clean white */
+  padding: 20px;             /* add inner spacing */
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* optional subtle shadow */
 }
+
 
 
     h2 {

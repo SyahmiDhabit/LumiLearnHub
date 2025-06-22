@@ -33,11 +33,20 @@ while ($row = mysqli_fetch_assoc($studentListResult)) {
 $studentFeedbacks = [];
 if ($selectedStudentID > 0) {
     $feedbackDetailsQuery = "
-        SELECT f.comment, f.rate, f.date
-        FROM feedback f
-        WHERE f.studentID = $selectedStudentID
-        ORDER BY f.date DESC
-    ";
+    SELECT 
+        f.comment, 
+        f.rate, 
+        f.date,
+        sub.subject_name AS subjectName,
+        t.tutor_fullName AS tutorName
+    FROM feedback f
+    JOIN subject sub ON f.subjectID = sub.subjectID
+    LEFT JOIN tutor_subject ts ON f.subjectID = ts.subjectID
+    LEFT JOIN tutor t ON ts.tutorID = t.tutorID
+    WHERE f.studentID = $selectedStudentID
+    ORDER BY f.date DESC
+";
+
     $feedbackResult = mysqli_query($conn, $feedbackDetailsQuery);
     if ($feedbackResult) {
         while ($row = mysqli_fetch_assoc($feedbackResult)) {
@@ -175,8 +184,11 @@ if ($selectedStudentID > 0) {
             <?php if (count($studentFeedbacks) > 0) : ?>
                 <?php foreach ($studentFeedbacks as $feedback) : ?>
                     <div class="feedback-entry">
+                        <p><strong>Subject:</strong> <?= htmlspecialchars($feedback['subjectName']) ?></p>
+                        <p><strong>Tutor:</strong> <?= $feedback['tutorName'] ? htmlspecialchars($feedback['tutorName']) : 'Not Assigned' ?></p>
                         <p><strong>Rating:</strong> <span class="feedback-rate"><?= $feedback['rate'] ?>/10</span></p>
                         <p><strong>Comment:</strong> <?= nl2br(htmlspecialchars($feedback['comment'])) ?></p>
+
                         <p class="feedback-date"><em>Date: <?= htmlspecialchars($feedback['date']) ?></em></p>
                     </div>
                 <?php endforeach; ?>

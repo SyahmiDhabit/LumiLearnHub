@@ -166,9 +166,91 @@ input[type="text"] {
   margin-left: 210px;
 }
 
-    h2 {
-      color: aliceblue;
+h2 {
+  color: aliceblue;
     }
+
+.report-section {
+  margin: 30px 60px 30px 370px; /* top, left/right, bottom */
+  background-color: #AC5656;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.scroll-box {
+  height: 300px;
+  overflow-y: scroll;
+  border: 2px solid #621818;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+table th, table td {
+  padding: 8px 12px;
+  border: 1px solid #aaa;
+  text-align: left;
+  background-color: #fff;
+}
+
+table th {
+  background-color: #eaeaea;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.scroll-box::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.scroll-box::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.scroll-box::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form select,
+form input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background-color: #E97979;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #621818;
+}
 
 
   
