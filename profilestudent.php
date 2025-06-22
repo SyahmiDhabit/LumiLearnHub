@@ -60,6 +60,8 @@ if ($result && $result->num_rows > 0) {
 
                     <br>
                     <a href="studentlogin.html"><button class="btn-logout">LOG OUT</button></a>
+                   <a href="updatestudentprofile.php"><button class="btn-logout">UPDATE</button></a>
+
                 </div>
             </div>
         </div>
