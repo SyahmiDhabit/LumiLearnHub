@@ -24,7 +24,6 @@ $students = $conn->query("SELECT * FROM student");
                 <h1 class="admin">ADMINISTRATION</h1>
             </div>
             <div class="navright">
-                 <a class="userIcon">
             </a>
             </div>
         </nav>
