@@ -1,20 +1,18 @@
 <?php
 session_start();
 
-// Check if tutor is logged in
 if (!isset($_SESSION['tutor_id'])) {
     header("Location: tutorlogin.php");
     exit;
 }
 
 $tutorID = $_SESSION['tutor_id'];
-include('connection.php'); // ✅ make sure this comes before any SQL
+include('connection.php'); 
 
 $tutorID = $_SESSION['tutor_id'];
-$tutorFullname = $_SESSION['tutor_fullname']; // ✅ This line fixes the warning
+$tutorFullname = $_SESSION['tutor_fullname']; 
 
 
-// Fetch feedback data for this tutor only
 $feedbackQuery = "
   SELECT 
     s.subject_name,
@@ -45,7 +43,7 @@ $result = $conn->query($feedbackQuery);
 </head>
 <body>
   <div class="header">
-    <a href="tutorinterface.html" class="brand">LumiLearnHub</a>
+    <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
     <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
     <div class="profile-icon"></div>
   </div>
@@ -110,7 +108,6 @@ $result = $conn->query($feedbackQuery);
          echo "<tr><td colspan='4'>No students found.</td></tr>";
         }
         ?>
-        <!-- Popup Modal -->
          <div id="commentPopup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; color:#000; padding:20px; border-radius:10px; z-index:1000; box-shadow:0 0 15px rgba(0,0,0,0.5); max-width:400px;">
         <p><strong>STUDENT:</strong> <span id="popupStudent"></span></p>
         <p><strong>COMMENT:</strong> <span id="popupComment"></span></p>
