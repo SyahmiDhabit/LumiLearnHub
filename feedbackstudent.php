@@ -2,6 +2,11 @@
 session_start();
 include('connection.php');
 
+if (!isset($_SESSION['studentID']) || !isset($_SESSION['student_fullName'])) {
+  header("Location: studentlogin.html");
+  exit();
+}
+
 $studentFullname = $_SESSION['student_fullName'];
 ?>
 
@@ -32,7 +37,7 @@ $studentFullname = $_SESSION['student_fullName'];
   </div>
 
   <div class="main-content">
-    <div class="table-section >
+    <div class="table-section" >
       <table class="subject-table">
         <thead>
           <tr>
@@ -71,30 +76,36 @@ $studentFullname = $_SESSION['student_fullName'];
     document.querySelector(".button-group button:nth-child(2)").onclick = () => window.location.href = "findtutor.php";
     document.querySelector(".button-group button:nth-child(3)").onclick = () => window.location.href = "viewfeedback.php";
 
-    // Load feedback data dynamically
-    $.getJSON("give_feedbacks.php", function(data) {
-      const tbody = $("#feedback-body").empty();
-      if (data.length === 0 || data.error) {
-        tbody.append("<tr><td colspan='4'>No subjects found or not logged in.</td></tr>");
-      } else {
-        data.forEach((row, index) => {
-          const status = row.isRated > 0
-            ? `<span style="color:green;text-decoration:underline;">Rated</span>`
-            : `<a href="give_feedback.php?subjectID=${row.subjectID}&tutor=${encodeURIComponent(row.tutor_fullName)}" style="color:blue;text-decoration:underline;">Unrated</a>`;
 
-          tbody.append(`
-            <tr>
-              <td>${index + 1}</td>
-              <td>${row.subject_name}</td>
-              <td>${row.tutor_fullName}</td>
-              <td>${status}</td>
-            </tr>
-          `);
-        });
-      }
-    }).fail(() => {
-      alert("Failed to load feedback data.");
+    // Load feedback data dynamically
+    $.getJSON("give_feedback.php", function(data) {
+  console.log("Response from give_feedbacks.php:", data); // DEBUG LOG
+  const tbody = $("#feedback-body").empty();
+
+  if (!Array.isArray(data) || data.length === 0 || data.error) {
+    console.warn("Invalid or empty data received.");
+    tbody.append("<tr><td colspan='4'>No subjects found or not logged in.</td></tr>");
+  } else {
+    data.forEach((row, index) => {
+      const status = row.isRated > 0
+        ? `<span style="color:green;text-decoration:underline;">Rated</span>`
+        : `<a href="give_rating.php?subjectID=${row.subjectID}&tutor=${encodeURIComponent(row.tutor_fullName)}" style="color:blue;text-decoration:underline;">Unrated</a>`;
+
+      tbody.append(`
+        <tr>
+          <td>${index + 1}</td>
+          <td>${row.subject_name}</td>
+          <td>${row.tutor_fullName}</td>
+          <td>${status}</td>
+        </tr>
+      `);
     });
+  }
+}).fail((jqXHR, textStatus, errorThrown) => {
+  console.error("AJAX failed!", textStatus, errorThrown);
+  console.log("Response text:", jqXHR.responseText);
+  alert("Failed to load feedback data.");
+});
   });
 </script>
 </body>

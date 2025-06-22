@@ -3,12 +3,12 @@ header('Content-Type: application/json');
 session_start();
 include("connection.php");
 
-if (!isset($_SESSION['student_id'])) {
+if (!isset($_SESSION['studentID'])) {
     echo json_encode(["error" => "Not logged in"]);
     exit;
 }
 
-$studentID = $_SESSION['student_id'];
+$studentID = $_SESSION['studentID'];
 
 $sql = "
     SELECT 

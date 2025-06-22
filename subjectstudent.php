@@ -58,6 +58,7 @@ $studentFullname = $_SESSION['student_fullName'];
             <th>No</th>
             <th>Subject</th>
             <th>Tutor</th>
+            <th>Phone Number</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -92,7 +93,7 @@ $studentFullname = $_SESSION['student_fullName'];
   });
 
   $(".user-top-icon").on("click", function () {
-    window.location.href = "profile2.html";
+    window.location.href = "profilestudent.php";
   });
 
   $(".button-group button:eq(0)").on("click", function () {
@@ -127,6 +128,7 @@ $studentFullname = $_SESSION['student_fullName'];
     data.forEach(function (row, index) {
       const subject = row.subject_name || "N/A";
       const tutor = row.tutor_fullName || "Not assigned yet";
+      const phone = row.tutor_phoneNumber || "Not available";
       const subjectID = row.subjectID;
 
       tbody.append(
@@ -134,6 +136,7 @@ $studentFullname = $_SESSION['student_fullName'];
           "<td>" + (index + 1) + "</td>" +
           "<td>" + subject + "</td>" +
           "<td>" + tutor + "</td>" +
+          "<td>" + phone + "</td>" +
         "</tr>"
       );
     });

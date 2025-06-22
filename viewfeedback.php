@@ -55,19 +55,23 @@ $studentFullname = $_SESSION['student_fullName'];
       <h2>LIST TUTOR</h2>
       <ul>
         <?php
-        $query = "SELECT t.tutor_fullName, ROUND(AVG(f.rate),1) AS avg_score
-                  FROM feedback f
-                  JOIN tutor_subject ts ON f.subjectID = ts.subjectID
-                  JOIN tutor t ON ts.tutorID = t.tutorID
-                  GROUP BY t.tutorID
-                  ORDER BY avg_score DESC
-                  LIMIT 10";
-        $result = $conn->query($query);
+        $query = "
+  SELECT DISTINCT t.tutor_fullName, f.rate
+  FROM feedback f
+  JOIN tutor_subject ts ON f.subjectID = ts.subjectID
+  JOIN tutor t ON ts.tutorID = t.tutorID
+  WHERE f.studentID = ?
+";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $studentID);
+$stmt->execute();
+$result = $stmt->get_result();
+        
         while ($row = $result->fetch_assoc()):
         ?>
         <li>
           <img src="image/LoginUser.png" class="user-icon">
-          <?= htmlspecialchars($row['tutor_fullName']) ?> - <?= $row['avg_score'] ?>/10
+          <?= htmlspecialchars($row['tutor_fullName']) ?> - <?= $row['rate'] ?>/10
         </li>
         <?php endwhile; ?>
       </ul>

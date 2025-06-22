@@ -139,7 +139,7 @@ if (selected) {
 
     // User profile icon
     document.querySelector(".user-top-icon").addEventListener("click", function () {
-        window.location.href = "profile2.html";
+        window.location.href = "profilestudent.php";
     });
 
     // Explore Subject Button

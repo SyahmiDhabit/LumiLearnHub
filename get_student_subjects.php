@@ -14,12 +14,14 @@ $sql = "
     SELECT 
         subj.subjectID,
         subj.subject_name,
-        COALESCE(tut.tutor_fullName, 'Not assigned yet') AS tutor_fullName
+        COALESCE(tut.tutor_fullName, 'Not assigned yet') AS tutor_fullName,
+        COALESCE(tut.tutor_phoneNumber, 'Not available') AS tutor_phoneNumber
     FROM student_subject ss
     INNER JOIN subject subj ON ss.subjectID = subj.subjectID
     LEFT JOIN tutor_subject ts ON ss.subjectID = ts.subjectID
     LEFT JOIN tutor tut ON ts.tutorID = tut.tutorID
     WHERE ss.studentID = ?
+    GROUP BY subj.subjectID
 ";
 
 $stmt = $conn->prepare($sql);
@@ -33,8 +35,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $data = [];
+$seen = [];
 while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
+    $subjID = $row['subjectID'];
+    if (!isset($seen[$subjID])) {
+        $data[] = $row;
+        $seen[$subjID] = true;
+    }
 }
 
 if (empty($data)) {
