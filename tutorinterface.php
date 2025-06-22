@@ -3,14 +3,33 @@ session_start();
 
 // Semak jika tutorID wujud dalam sesi
 if (!isset($_SESSION['tutor_id'])) {
-    // Arahkan ke log masuk jika tiada sesi
-    header("Location: tutorlogin.html");
+    header("Location: tutorlogin.php");
     exit();
 }
 
 // Ambil data tutor daripada sesi
 $tutorID = $_SESSION['tutor_id'];
 $tutorFullname = $_SESSION['tutor_fullname'];
+
+// Sambung ke pangkalan data
+include 'connection.php';
+
+// Dapatkan semua subjek daripada table subject
+$query = "SELECT * FROM subject";
+$result = $conn->query($query);
+
+// Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject
+$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ?";
+$stmtApplied = $conn->prepare($queryApplied);
+$stmtApplied->bind_param("i", $tutorID);
+$stmtApplied->execute();
+$appliedSubjectsResult = $stmtApplied->get_result();
+
+// Simpan ID subjek yang sudah dipohon oleh tutor
+$appliedSubjectIDs = [];
+while ($row = $appliedSubjectsResult->fetch_assoc()) {
+    $appliedSubjectIDs[] = $row['subjectID'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +42,7 @@ $tutorFullname = $_SESSION['tutor_fullname'];
 </head>
 <body>
   <div class="header">
-    <a href="tutorinterface.html" class="brand">LumiLearnHub</a>
+    <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
     <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
     <div class="profile-icon"></div>
   </div>
@@ -31,7 +50,7 @@ $tutorFullname = $_SESSION['tutor_fullname'];
   <div class="container">
     <div class="sidebar">
       <div class="menu-title">MENU OPTION</div>
-      <a href="scheduletutor.html" class="menu-item">
+      <a href="scheduletutor.php" class="menu-item">
         <span>My Schedule</span>
         <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
       </a>
@@ -41,41 +60,43 @@ $tutorFullname = $_SESSION['tutor_fullname'];
         <img src="image/usericon.png" alt="user icon" class="menu-icon">
       </a>
 
-      <a href="remindertutor.html" class="menu-item">
-        <span>Reminder</span>
-        <img src="image/clockicon.png" alt="clock icon" class="menu-icon">
-      </a>
-
-      <a href="requeststudenttutor.html" class="menu-item">
-        <span>Student Request</span>
-        <img src="image/requesticon.png" alt="request icon" class="menu-icon">
-      </a>
-
       <a href="feedbacktutor.html" class="menu-item">
         <span>Feedback</span>
         <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon">
       </a>
+
+      <a href="applicationtutor.php" class="menu-item">
+        <span>Subject Tutoring Request</span>
+        <img src="image/requesticon.png" alt="request icon" class="menu-icon">
+      </a>
     </div>
 
     <div class="main-content">
-      <div class="top-buttons">
-        <a href="availabletutor.html"><button class="top-btn">Availability</button></a>
-        <a href="applicationtutor.php"><button class="top-btn">Application for Subject Tutoring</button></a>
-      </div>
-
       <div class="content-section">
-        <div class="top-tutors">
-          <h3>Top Tutors</h3>
-          <ul>
-            <li><div class="avatar"></div> Subiyamin bin Sulaiman</li>
-            <li><div class="avatar"></div> Muhammad Sumbul</li>
-            <li><div class="avatar"></div> Saidatul Syuhada</li>
-            <li><div class="avatar"></div> Fakhrul Razi</li>
-            <li><div class="avatar"></div> Felix Zemdegs</li>
-            <li><div class="avatar"></div> Atiqah Lazim</li>
+        <!-- Subject List Section -->
+        <div class="subject-list-container">
+          <h3>Subjects to Apply</h3>
+          <ul class="subject-list">
+            <?php while ($row = $result->fetch_assoc()): ?>
+              <li>
+                <?php if (in_array($row['subjectID'], $appliedSubjectIDs)): ?>
+                  <!-- If applied, show as non-clickable -->
+                  <div class="subject-box applied">
+                    <span class="subject-name"><?php echo $row['subject_name']; ?></span>
+                    <span class="status">Applied</span>
+                  </div>
+                <?php else: ?>
+                  <!-- For available subjects, make them clickable -->
+                  <a href="applicationtutor.php?subjectID=<?php echo $row['subjectID']; ?>" class="subject-box">
+                    <span class="subject-name"><?php echo $row['subject_name']; ?></span>
+                  </a>
+                <?php endif; ?>
+              </li>
+            <?php endwhile; ?>
           </ul>
         </div>
 
+        <!-- Image Section -->
         <div class="qualities">
           <img src="image/goodtutor.jpg" alt="Tutor Qualities Poster" />
         </div>

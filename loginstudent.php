@@ -18,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare statement to avoid SQL injection
     $stmt = $conn->prepare("SELECT * FROM student WHERE student_username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt->bind_param("s", $student_username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     // Validate account
     if ($result && $result->num_rows === 1) {
-        $row = $result->fetch_assoc();
+        $student = $result->fetch_assoc();
 
         // Verify password
         if (password_verify($password, $row['student_password'])) {

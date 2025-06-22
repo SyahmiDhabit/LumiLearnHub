@@ -1,15 +1,15 @@
 <?php
 session_start();
-include ("connection.php");
+include("connection.php");
 
 // Check if the student is logged in
-if (!isset($_SESSION['studentID'])) {
+if (!isset($_SESSION['student_id'])) {
     header("Location: studentlogin.html");
     exit();
 }
 
 // Get student name from session
-$studentName = $_SESSION['student_fullName'];
+$studentName = $_SESSION['student_fullname'];
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +23,12 @@ $studentName = $_SESSION['student_fullName'];
 </head>
 <body>
   <div class="header-bar">
-  <button class="logo">LumiLearnHub</button>
-    <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
-</div>
-  
+    <button class="logo">LumiLearnHub</button>
+    <a href="profilestudent.php">
+      <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
+    </a>
+  </div>
+
   <div class="welcome-section">
     <h1 class="welcome-title">WELCOME STUDENT: <?php echo htmlspecialchars($studentName); ?>!</h1>
     <p class="description">
@@ -41,7 +43,7 @@ $studentName = $_SESSION['student_fullName'];
   <div class="top-buttons">
     <button id="explore-subject-btn"><img src="image/subject.png" alt=""> Explore Subject</button>
     <button id="find-tutor-btn"><img src="image/findtutor.png" alt=""> Find a Tutor</button>
-    <button id="top-tutors-btn"><img src="image/viewfeedback.png" alt=""> View Feedback</button>
+    <button id="top-tutors-btn"><img src="image/toptutor.png" alt=""> Top Tutors</button>
   </div>
 
   <div class="main-section">
@@ -81,45 +83,41 @@ $studentName = $_SESSION['student_fullName'];
     2025 LumiLearnHub. All rights reserved
   </footer>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("explore-subject-btn").addEventListener("click", function () {
-      window.location.href = "searchsubject.php";
-    });
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("explore-subject-btn").addEventListener("click", function () {
+        window.location.href = "searchsubject.php";
+      });
 
-    document.getElementById("find-tutor-btn").addEventListener("click", function () {
-      window.location.href = "findtutor.php";
-    });
+      document.getElementById("find-tutor-btn").addEventListener("click", function () {
+        window.location.href = "findtutor.php";
+      });
 
-    document.getElementById("top-tutors-btn").addEventListener("click", function () {
-      window.location.href = "toptutors.php";
-    });
+      document.getElementById("top-tutors-btn").addEventListener("click", function () {
+        window.location.href = "toptutors.php";
+      });
 
-    document.getElementById("tutor-request-btn").addEventListener("click", function () {
-      window.location.href = "tutorrequeststudent.html";
-    });
+      document.getElementById("tutor-request-btn").addEventListener("click", function () {
+        window.location.href = "tutorrequeststudent.html";
+      });
 
-    document.getElementById("reminder-btn").addEventListener("click", function () {
-      window.location.href = "reminderstudent.html";
-    });
+      document.getElementById("reminder-btn").addEventListener("click", function () {
+        window.location.href = "reminderstudent.html";
+      });
 
-    document.getElementById("my-schedule-btn").addEventListener("click", function () {
-      window.location.href = "schedulestudent.php";
-    });
+      document.getElementById("my-schedule-btn").addEventListener("click", function () {
+        window.location.href = "schedulestudent.php";
+      });
 
-    document.getElementById("my-subject-btn").addEventListener("click", function () {
-      window.location.href = "subjectstudent.php";
-    });
+      document.getElementById("my-subject-btn").addEventListener("click", function () {
+        window.location.href = "subjectstudent.php";
+      });
 
-    document.getElementById("feedback-btn").addEventListener("click", function () {
-      window.location.href = "feedbackstudent.php";
+      document.getElementById("feedback-btn").addEventListener("click", function () {
+        window.location.href = "feedbackstudent.php";
+      });
     });
-
-    document.querySelector(".user-top-icon").addEventListener("click", function () {
-      window.location.href = "profilestudent.php";
-    });
-  });
-</script>
+  </script>
 
 </body>
 </html>
