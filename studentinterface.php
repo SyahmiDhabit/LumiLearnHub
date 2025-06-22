@@ -47,37 +47,25 @@ $studentName = $_SESSION['student_fullName'];
   </div>
 
   <div class="main-section">
-    <div class="left-column">
-      <h3>Tutor Suggestions</h3>
-      <ul class="tutor-list">
-        <li>Subiyamin bin Sulaiman</li>
-        <li>Khaleed Kashmiri</li>
-        <li>Muhammad Sumbul</li>
-        <li>Ismail Al Khanabawi</li>
-        <li>Fakhrul Razi</li>
-      </ul>
-    </div>
+  <div class="left-column">
+    <img class="poster-image" src="image/Poster student.jpg" alt="Poster">
+  </div>
 
-    <div class="middle-column">
-      <button class="small-button" id="tutor-request-btn">Tutor Request</button>
-      <button class="small-button" id="reminder-btn">Reminder</button>
+  <div class="right-column">
+    <div class="big-button" id="my-schedule-btn">
+      <img src="image/calendaricon.png" alt="My Schedule">
+      <span>My Schedule</span>
     </div>
-
-    <div class="right-column">
-      <div class="big-button" id="my-schedule-btn">
-        <img src="image/calendaricon.png" alt="My Schedule">
-        <span>My Schedule</span>
-      </div>
-      <div class="big-button" id="my-subject-btn">
-        <img src="image/subject.png" alt="My Subject">
-        <span>My Subject</span>
-      </div>
-      <div class="big-button" id="feedback-btn">
-        <img src="image/feedbackicon.png" alt="Feedback">
-        <span>Feedback</span>
-      </div>
+    <div class="big-button" id="my-subject-btn">
+      <img src="image/subject.png" alt="My Subject">
+      <span>My Subject</span>
+    </div>
+    <div class="big-button" id="feedback-btn">
+      <img src="image/feedbackicon.png" alt="Feedback">
+      <span>Feedback</span>
     </div>
   </div>
+</div>
 
   <footer>
     2025 LumiLearnHub. All rights reserved
@@ -95,14 +83,6 @@ $studentName = $_SESSION['student_fullName'];
 
       document.getElementById("view-feedback-btn").addEventListener("click", function () {
         window.location.href = "viewfeedback.php";
-      });
-
-      document.getElementById("tutor-request-btn").addEventListener("click", function () {
-        window.location.href = "tutorrequeststudent.html";
-      });
-
-      document.getElementById("reminder-btn").addEventListener("click", function () {
-        window.location.href = "reminderstudent.html";
       });
 
       document.getElementById("my-schedule-btn").addEventListener("click", function () {

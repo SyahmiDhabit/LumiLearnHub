@@ -60,7 +60,7 @@ while ($row = $appliedSubjectsResult->fetch_assoc()) {
         <img src="image/usericon.png" alt="user icon" class="menu-icon">
       </a>
 
-      <a href="feedbacktutor.html" class="menu-item">
+      <a href="feedbacktutor.php" class="menu-item">
         <span>Feedback</span>
         <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon">
       </a>
