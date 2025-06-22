@@ -107,7 +107,7 @@
             <li><a href="feedbackadministration.php">FEEDBACK</a></li>
             <li><a href="reportadministration.php">REPORT</a></li>
             <li><a href="administrationlist.php">LIST</a></li>
-            <li><a href="login.html">LOGOUT</a></li>
+           <li><a href="mainpage.php" onclick="return confirmLogout()">LOGOUT</a></li>
         </ul>
     </div>
 
@@ -163,5 +163,9 @@
             ?>
         </div>
     </div>
+    <script>
+  function confirmLogout() {
+  return confirm("Are you sure you want to logout?");
+}</script>
 </body>
 </html>

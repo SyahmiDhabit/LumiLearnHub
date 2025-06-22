@@ -11,6 +11,7 @@
 
 <?php
 include('connection.php');
+
 ?>
    <div class="bar">
     <nav class="navbar">

@@ -42,7 +42,7 @@ $students = $conn->query("SELECT * FROM student");
                 <li><a href="feedbackadministration.php">FEEDBACK</a></li>
                 <li><a href="reportadministration.php">REPORT</a></li>
                 <li><a href="administrationlist.php" id="home">LIST</a></li>
-                <li><a href="mainpage.php">LOGOUT</a></li>
+                <li><a href="mainpage.php" onclick="return confirmLogout()">LOGOUT</a></li>
          </ul>
         </div> 
 
@@ -128,6 +128,9 @@ function filterList(inputId, listId) {
     let name = list[i].innerText.toLowerCase();
     list[i].style.display = name.includes(input) ? "block" : "none";
   }
+}
+function confirmLogout() {
+  return confirm("Are you sure you want to logout?");
 }
 </script>
 
