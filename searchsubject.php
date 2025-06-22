@@ -79,10 +79,7 @@ $studentFullname = $_SESSION['student_fullName'];
         <button class="subject-btn">Geography</button>
         <button class="subject-btn">Moral Studies</button>
         <button class="subject-btn">Islamic Studies</button>
-        <button class="subject-btn">Programming</button>
         <button class="subject-btn">Art</button>
-        <button class="subject-btn">PE (Physical Ed)</button>
-        <button class="subject-btn">Design & Tech</button>
         <button class="subject-btn">Literature</button>
         <button class="subject-btn">Economics</button>
         <button class="subject-btn">Account</button>
@@ -90,7 +87,6 @@ $studentFullname = $_SESSION['student_fullName'];
         <button class="subject-btn">Music</button>
         <button class="subject-btn">Basic Math</button>
         <button class="subject-btn">Civics</button>
-        <button class="subject-btn">ICT</button>
       </div>
     </div>
 
