@@ -57,7 +57,7 @@ $result = $conn->query($feedbackQuery);
       <span>My Schedule</span>
       <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
     </a>
-    <a href="mystudenttutor.html" class="menu-item">
+    <a href="mystudenttutor.php" class="menu-item">
       <span>My Student</span>
       <img src="image/usericon.png" alt="user icon" class="menu-icon">
     </a>

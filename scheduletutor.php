@@ -51,7 +51,7 @@ $stmt->close();
 <div class="header">
   <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
   <div class="welcome">WELCOME, <?php echo strtoupper($_SESSION['tutor_fullname']); ?>!</div>
-  <a href="profile.html">
+    <a href="profiletutor.php">
     <div class="profile-icon"></div>
   </a>
 </div>

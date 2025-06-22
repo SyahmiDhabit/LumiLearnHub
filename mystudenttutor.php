@@ -51,7 +51,7 @@ $result = $conn->query($studentQuery);
   <div class="header">
   <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
   <div class="welcome">WELCOME, <?php echo strtoupper($_SESSION['tutor_fullname']); ?>!</div>
-  <a href="profile.html">
+  <a href="profiletutor.php">
     <div class="profile-icon"></div>
   </a>
 </div>
@@ -76,7 +76,7 @@ $result = $conn->query($studentQuery);
       </a>
 
       <a href="applicationtutor.php" class="menu-item">
-        <span>Application for Subject Tutoring</span>
+        <span>Subject Tutoring Request</span>
         <img src="image/requesticon.png" alt="request icon" class="menu-icon">
       </a>
     </div>
