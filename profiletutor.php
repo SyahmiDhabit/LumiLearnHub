@@ -58,6 +58,8 @@ if ($result && mysqli_num_rows($result) > 0) {
 
                     <br>
                     <a href="tutorlogin.html"><button class="btn-logout">LOG OUT</button></a>
+                    <a href="updatetutorprofile.php"><button class="btn-logout">UPDATE</button></a>
+
                 </div>
             </div>
         </div>

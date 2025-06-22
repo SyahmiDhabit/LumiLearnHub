@@ -51,7 +51,7 @@ $stmt->close();
 <div class="header">
   <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
   <div class="welcome">WELCOME, <?php echo strtoupper($_SESSION['tutor_fullname']); ?>!</div>
-  <a href="profile.html">
+    <a href="profiletutor.php">
     <div class="profile-icon"></div>
   </a>
 </div>
@@ -63,7 +63,7 @@ $stmt->close();
       <span>My Schedule</span>
       <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
     </a>
-    <a href="mystudenttutor.html" class="menu-item">
+    <a href="mystudenttutor.php" class="menu-item">
       <span>My Student</span>
       <img src="image/usericon.png" alt="user icon" class="menu-icon">
     </a>
