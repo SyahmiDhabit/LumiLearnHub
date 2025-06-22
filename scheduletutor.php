@@ -35,6 +35,34 @@ while ($row = $result->fetch_assoc()) {
 }
 
 $stmt->close();
+
+// Ambil senarai pelajar yang sedang mendaftar pada tutor ini yang belum dimasukkan ke dalam jadual
+$query = "
+    SELECT s.student_fullName, sub.subject_name 
+    FROM student s
+    JOIN student_subject ss ON s.studentID = ss.studentID
+    JOIN subject sub ON ss.subjectID = sub.subjectID
+    WHERE ss.status = 'Enrolled' 
+    AND sub.subjectID IN 
+        (SELECT subjectID FROM tutor_subject WHERE tutorID = ?)
+    AND NOT EXISTS (
+        SELECT 1
+        FROM tutor_schedule ts
+        WHERE ts.student_name = s.student_fullName 
+        AND ts.subject = sub.subject_name
+        AND ts.tutorID = ?
+    )
+";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ii", $tutorID, $tutorID);
+$stmt->execute();
+$result = $stmt->get_result();
+$studentsSubjects = [];
+
+while ($row = $result->fetch_assoc()) {
+    $studentsSubjects[] = $row;
+}
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -104,13 +132,15 @@ $stmt->close();
       </div>
 
       <div class="form-group">
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" class="form-control" required placeholder="Enter subject" />
-      </div>
-
-      <div class="form-group">
-        <label for="student_name">Student Name:</label>
-        <input type="text" id="student_name" name="student_name" class="form-control" required placeholder="Enter student name" />
+        <label for="student_subject">Student and Subject:</label>
+        <select id="student_subject" name="student_subject" class="form-control" required>
+          <option value="">Select Student and Subject</option>
+          <?php foreach ($studentsSubjects as $item): ?>
+            <option value="<?php echo $item['student_fullName'] . " - " . $item['subject_name']; ?>">
+                <?php echo $item['student_fullName'] . " - " . $item['subject_name']; ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
       </div>
 
       <button type="submit" class="action-btn" name="add_schedule">
@@ -134,9 +164,7 @@ $stmt->close();
             <td><?php echo $row['subject']; ?></td>
             <td><?php echo $row['student_name']; ?></td>
             <td>
-              <!-- Form untuk memadam jadual -->
               <form method="POST" action="delete_scheduletutor.php">
-                <!-- Hantar ID Jadual untuk Dihapuskan -->
                 <input type="hidden" name="schedule_id" value="<?php echo $row['scheduleID']; ?>" />
                 <button type="submit" class="action-btn-remove" name="delete_schedule">
                   <i class="fas fa-trash-alt"></i> Remove

@@ -14,18 +14,18 @@ $tutorFullname = $_SESSION['tutor_fullname'];
 // Sambung ke pangkalan data
 include 'connection.php';
 
-// Dapatkan semua subjek daripada table subject
+// Dapatkan semua subjek dengan status 'Approved' daripada table subject
 $query = "SELECT * FROM subject";
 $result = $conn->query($query);
 
-// Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject
-$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ?";
+// Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject dengan status 'Approved'
+$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ? AND status = 'Approved'";
 $stmtApplied = $conn->prepare($queryApplied);
 $stmtApplied->bind_param("i", $tutorID);
 $stmtApplied->execute();
 $appliedSubjectsResult = $stmtApplied->get_result();
 
-// Simpan ID subjek yang sudah dipohon oleh tutor
+// Simpan ID subjek yang sudah dipohon oleh tutor dengan status 'Approved'
 $appliedSubjectIDs = [];
 while ($row = $appliedSubjectsResult->fetch_assoc()) {
     $appliedSubjectIDs[] = $row['subjectID'];
@@ -45,9 +45,9 @@ while ($row = $appliedSubjectsResult->fetch_assoc()) {
     <a href="tutorinterface.php" class="brand">LumiLearnHub</a>
     <div class="welcome">WELCOME, <?php echo strtoupper($tutorFullname); ?>!</div>
     <a href="profiletutor.php">
-     <div class="profile-icon"></div>
-      </a>  
-    </div>  </div>
+      <div class="profile-icon"></div>
+    </a>  
+  </div>
 
   <div class="container">
     <div class="sidebar">
@@ -56,17 +56,14 @@ while ($row = $appliedSubjectsResult->fetch_assoc()) {
         <span>My Schedule</span>
         <img src="image/calendaricon.png" alt="calendar icon" class="menu-icon">
       </a>
-
       <a href="mystudenttutor.php" class="menu-item">
         <span>My Student</span>
         <img src="image/usericon.png" alt="user icon" class="menu-icon">
       </a>
-
       <a href="feedbacktutor.php" class="menu-item">
         <span>Feedback</span>
         <img src="image/feedbackicon.png" alt="feedback icon" class="menu-icon">
       </a>
-
       <a href="applicationtutor.php" class="menu-item">
         <span>Subject Tutoring Request</span>
         <img src="image/requesticon.png" alt="request icon" class="menu-icon">
@@ -82,7 +79,7 @@ while ($row = $appliedSubjectsResult->fetch_assoc()) {
             <?php while ($row = $result->fetch_assoc()): ?>
               <li>
                 <?php if (in_array($row['subjectID'], $appliedSubjectIDs)): ?>
-                  <!-- If applied, show as non-clickable -->
+                  <!-- If applied and approved, show as non-clickable -->
                   <div class="subject-box applied">
                     <span class="subject-name"><?php echo $row['subject_name']; ?></span>
                     <span class="status">Applied</span>
