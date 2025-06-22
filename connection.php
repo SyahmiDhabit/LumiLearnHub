@@ -1,9 +1,9 @@
 <?php
 
-$server = 'localhost:3301';
+$server = 'localhost';
 $username = 'root';
-$password = '1234';
-$dbname = 'student_lumilearn';
+$password = '';
+$dbname = 'lumilearn';
 
 
 //Create connection
