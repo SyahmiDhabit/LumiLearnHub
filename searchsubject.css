@@ -74,11 +74,11 @@ body {
 }
 
 .welcome-section {
-  background-color: #640a0a; /* Matching top bar */
+  background-color: #640a0a;
   color: white;
   padding: 30px 20px;
   text-align: center;
-  border-radius: 0 0 20px 20px; /* Creates full-width effect */
+  border-radius: 0 0 20px 20px;
   margin-bottom: 20px;
 }
 

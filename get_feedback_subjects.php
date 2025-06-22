@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 session_start();
 
-// Simulate login if needed (for testing)
+
 $studentID = $_SESSION['studentID'] ?? 3;
 
 include("connection.php");

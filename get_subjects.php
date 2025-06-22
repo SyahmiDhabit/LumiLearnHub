@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 include("connection.php");
 
-// Optional: check DB connection
+//check DB connection
 if ($conn->connect_error) {
   echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
   exit;

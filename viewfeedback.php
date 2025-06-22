@@ -15,13 +15,13 @@ $studentFullname = $_SESSION['student_fullName'];
 <head>
   <meta charset="UTF-8">
   <title>LumiLearnHub - View Feedback</title>
-  <link rel="stylesheet" href="toptutors.css">
+  <link rel="stylesheet" href="viewfeedback.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
   <div class="header-bar">
     <button class="back-button">BACK TO HOME</button>
-    <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
+    <img class="user-top-icon" src="image/PpLogo.jpg" alt="User Icon">
   </div>
 
   <div class="welcome-section">
@@ -56,16 +56,16 @@ $studentFullname = $_SESSION['student_fullName'];
       <ul>
         <?php
         $query = "
-  SELECT DISTINCT t.tutor_fullName, f.rate
-  FROM feedback f
-  JOIN tutor_subject ts ON f.subjectID = ts.subjectID
-  JOIN tutor t ON ts.tutorID = t.tutorID
-  WHERE f.studentID = ?
-";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $studentID);
-$stmt->execute();
-$result = $stmt->get_result();
+        SELECT DISTINCT t.tutor_fullName, f.rate
+        FROM feedback f
+        JOIN tutor_subject ts ON f.subjectID = ts.subjectID
+        JOIN tutor t ON ts.tutorID = t.tutorID
+        WHERE f.studentID = ?
+        ";
+      $stmt = $conn->prepare($query);
+      $stmt->bind_param("i", $studentID);
+      $stmt->execute();
+      $result = $stmt->get_result();
         
         while ($row = $result->fetch_assoc()):
         ?>

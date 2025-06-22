@@ -25,7 +25,7 @@ $studentName = $_SESSION['student_fullName'];
   <div class="header-bar">
     <button class="logo">LumiLearnHub</button>
     <a href="profilestudent.php">
-      <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
+      <img class="user-top-icon" src="image/PpLogo.jpg" alt="User Icon">
     </a>
   </div>
 

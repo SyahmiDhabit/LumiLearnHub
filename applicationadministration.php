@@ -17,7 +17,7 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-        }
+        } 
 
         .feedback-card {
             background-color: #fff;

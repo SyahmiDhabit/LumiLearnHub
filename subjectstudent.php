@@ -23,7 +23,7 @@ $studentFullname = $_SESSION['student_fullName'];
 
   <div class="header-bar">
     <button class="back-button">BACK TO HOME</button>
-    <img class="user-top-icon" src="image/LoginUser.png" alt="User Icon">
+    <img class="user-top-icon" src="image/PpLogo.jpg" alt="User Icon">
   </div>
 
   <div class="welcome-section">
