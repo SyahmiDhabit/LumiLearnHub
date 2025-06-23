@@ -3,7 +3,6 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['subjectID'])) {
     $subjectID = $_POST['subjectID'];
 
-    // Get the logged-in student ID from session
     if (!isset($_SESSION['studentID'])) {
         echo "Error: Student not logged in.";
         exit;
@@ -15,8 +14,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['subjectID'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $enrollmentDate = date('Y-m-d'); // today's date
-    $status = "Enrolled"; // or any appropriate status value
+    // Check if already enrolled
+    $checkStmt = $conn->prepare("SELECT * FROM student_subject WHERE studentID = ? AND subjectID = ?");
+    $checkStmt->bind_param("ii", $studentID, $subjectID);
+    $checkStmt->execute();
+    $checkResult = $checkStmt->get_result();
+
+    if ($checkResult->num_rows > 0) {
+        echo "You have already enrolled in this subject.";
+        $checkStmt->close();
+        $conn->close();
+        exit;
+    }
+    $checkStmt->close();
+
+    // Proceed with enrollment if not already enrolled
+    $enrollmentDate = date('Y-m-d');
+    $status = "Enrolled";
 
     $stmt = $conn->prepare("INSERT INTO student_subject (studentID, subjectID, enrollment_date, status) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("iiss", $studentID, $subjectID, $enrollmentDate, $status);
