@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Choose Package</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #e2b1b7;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .package {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .package:hover {
+      transform: translateY(-5px);
+    }
+
+    .package h3 {
+      color: #34495e;
+      margin-bottom: 10px;
+    }
+
+    .package p {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .package button {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .package button:hover {
+      background-color: #27ae60;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .package {
+        padding: 15px;
+      }
+
+      .package h3 {
+        font-size: 16px;
+      }
+
+      .package p {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Select a Learning Package</h2>
+
+  <div class="package">
+    <h3>Bahasa Melayu – Express Mastery</h3>
+    <p>Description: Fundamentals of the Malay language and literature.<br>Day: Monday<br>Time: 4.30pm - 6.30pm</p>
+    <button onclick="choosePackage('Bahasa Melayu', 'Monday', '4.30pm - 6.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>English – Pro Language Booster</h3>
+    <p>Description: Grammar, vocabulary, and composition in English.<br>Day: Tuesday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('English', 'Tuesday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Computer Science – Code Sprint</h3>
+    <p>Description: Intro to programming, data structures, and algorithms.<br>Day: Wednesday<br>Time: 8.30am - 10.30am</p>
+    <button onclick="choosePackage('Computer Science', 'Wednesday', '8.30am - 10.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Add Math – Advanced Track</h3>
+    <p>Description: Advanced algebra, calculus, and trigonometry.<br>Day: Thursday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('Add Math', 'Thursday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Biology – Life Science Focus</h3>
+    <p>Description: Study of living organisms, cells, and systems.<br>Day: Sunday<br>Time: 8.30am - 10.30am</p>
+    <button onclick="choosePackage('Biology', 'Sunday', '8.30am - 10.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Math – Focus Drill</h3>
+    <p>Description: Core math concepts: algebra, geometry, and statistics.<br>Day: Sunday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('Math', 'Sunday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Chemistry – Reaction Ready</h3>
+    <p>Description: Chemical reactions, atoms, and periodic trends.<br>Day: Monday<br>Time: 8.30am - 10.30am</p>
+    <button onclick="choosePackage('Chemistry', 'Monday', '8.30am - 10.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Science – Integrated Concepts</h3>
+    <p>Description: Physics, chemistry, and biology combined.<br>Day: Tuesday<br>Time: 4.30pm - 6.30pm</p>
+    <button onclick="choosePackage('Science', 'Tuesday', '4.30pm - 6.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Physics – Motion Mechanics</h3>
+    <p>Description: Motion, forces, energy, and electricity.<br>Day: Thursday<br>Time: 11.30pm - 12.30am</p>
+    <button onclick="choosePackage('Physics', 'Thursday', '11.30pm - 12.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>History – Time Traveler Track</h3>
+    <p>Description: Exploration of world and Malaysian history.<br>Day: Tuesday<br>Time: 9.30pm - 10.30pm</p>
+    <button onclick="choosePackage('History', 'Tuesday', '9.30pm - 10.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Geography – Map & Mindset</h3>
+    <p>Description: Maps, landscapes, climate, and natural resources.<br>Day: Thursday<br>Time: 4.30pm - 6.30pm</p>
+    <button onclick="choosePackage('Geography', 'Thursday', '4.30pm - 6.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Moral Studies – Character Focus</h3>
+    <p>Description: Values, ethics, and character building.<br>Day: Wednesday<br>Time: 9.30pm - 10.30pm</p>
+    <button onclick="choosePackage('Moral Studies', 'Wednesday', '9.30pm - 10.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Islamic Studies – Faith Foundations</h3>
+    <p>Description: Understanding Islamic principles and practices.<br>Day: Sunday<br>Time: 9.30pm - 10.30pm</p>
+    <button onclick="choosePackage('Islamic Studies', 'Sunday', '9.30pm - 10.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Programming – Logic & Problem Solving</h3>
+    <p>Description: Problem-solving through coding and logic.<br>Day: Monday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('Programming', 'Monday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Art – Create & Color</h3>
+    <p>Description: Creative expression through visual arts.<br>Day: Tuesday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('Art', 'Tuesday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>PE (Physical Ed) – Active Wellness</h3>
+    <p>Description: Fitness, teamwork, and physical wellbeing.<br>Day: Thursday<br>Time: 8.30am - 10.30am</p>
+    <button onclick="choosePackage('PE (Physical Ed)', 'Thursday', '8.30am - 10.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Design & Tech – Build Basics</h3>
+    <p>Description: Basic technical drawing and hands-on design.<br>Day: Wednesday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('Design & Tech', 'Wednesday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Literature – Story & Soul</h3>
+    <p>Description: Appreciating stories, poetry, and drama.<br>Day: Monday<br>Time: 9.30pm - 10.30pm</p>
+    <button onclick="choosePackage('Literature', 'Monday', '9.30pm - 10.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Economics – Market Explorer</h3>
+    <p>Description: Understanding markets, scarcity, and production.<br>Day: Tuesday<br>Time: 8.30am - 10.30am</p>
+    <button onclick="choosePackage('Economics', 'Tuesday', '8.30am - 10.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Account – Finance Starter</h3>
+    <p>Description: Bookkeeping, financial statements, and audits.<br>Day: Wednesday<br>Time: 11.30pm - 12.30am</p>
+    <button onclick="choosePackage('Account', 'Wednesday', '11.30pm - 12.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Business – Entrepreneurship Path</h3>
+    <p>Description: Marketing, management, and entrepreneurship.<br>Day: Thursday<br>Time: 9.30pm - 10.30pm</p>
+    <button onclick="choosePackage('Business', 'Thursday', '9.30pm - 10.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Music – Sound & Skills</h3>
+    <p>Description: Rhythm, melody, and musical performance.<br>Day: Sunday<br>Time: 4.30pm - 6.30pm</p>
+    <button onclick="choosePackage('Music', 'Sunday', '4.30pm - 6.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Basic Math – Skill Builder</h3>
+    <p>Description: Arithmetic, fractions, and basic problem-solving.<br>Day: Monday<br>Time: 11.30pm - 12.30am</p>
+    <button onclick="choosePackage('Basic Math', 'Monday', '11.30pm - 12.30am')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>Civics – Community & Country</h3>
+    <p>Description: Roles of citizens, government, and community.<br>Day: Wednesday<br>Time: 4.30pm - 6.30pm</p>
+    <button onclick="choosePackage('Civics', 'Wednesday', '4.30pm - 6.30pm')">Choose</button>
+  </div>
+
+  <div class="package">
+    <h3>ICT – Digital Skills Intro</h3>
+    <p>Description: Computers, software, and digital safety.<br>Day: Thursday<br>Time: 12.30pm - 2.30pm</p>
+    <button onclick="choosePackage('ICT', 'Thursday', '12.30pm - 2.30pm')">Choose</button>
+  </div>
+
+  <script>
+    function choosePackage(subject, day, timeSlot) {
+      localStorage.setItem("selectedPackage", JSON.stringify({ subject, day, timeSlot }));
+      window.close(); // Close popup
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+/* Base */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #7f4e4e;
+  margin: 0;
+  padding: 0;
+}
+
+/* Top Bar */
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a55252;
+  padding: 10px 20px;
+  border-radius: 0 0 20px 20px;
+}
+.back-btn,
+.signup-btn {
+  background-color: #4a0b0b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.back-btn:hover,
+.signup-btn:hover {
+  background-color: #7a1f1f;
+}
+
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.text {
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Header title */
+h1 {
+  text-align: center;
+  background-color: #a55252;
+  padding: 10px 40px;
+  border-radius: 20px;
+  border: 3px solid #a55252;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  width: max-content;
+  margin: 30px auto 10px auto;
+}
+
+/* Center wrapper */
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+/* Form Container */
+section {
+  background-color: #843e3b;
+  padding: 27px;
+  border-radius: 15px;
+  width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+article.form {
+  background-color: #a55252;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* Form */
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  color: white;
+}
+
+.full-width {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e8c3c3;
+}
+
+/* Buttons inside form */
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#submit,
+.cancel-link {
+  background-color: #4a0b0b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+#submit:hover,
+.cancel-link:hover {
+  background-color: #7a1f1f;
+  color: white;
+}
+
+/* Status text */
+.status p {
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #7e3d3c;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.footer {
+  color: black;
+}
