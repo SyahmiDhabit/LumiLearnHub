@@ -59,9 +59,18 @@ $studentFullname = $_SESSION['student_fullName'];
     <h2 id="subject-title">Subject Details</h2>
     <p><strong>Subject ID:</strong> <span id="subject-id"></span></p>
     <p><strong>Description:</strong> <span id="subject-description"></span></p>
+
+    <!-- 👇 Add this section for selecting tutor -->
+    <p><strong>Tutor:</strong>
+      <select id="tutor-select">
+        <option value="">Select a tutor</option>
+      </select>
+    </p>
+
     <button id="enroll-btn">Enroll</button>
   </div>
-  </div>
+</div>
+
 
  
     <div class="subject-section">
@@ -141,29 +150,39 @@ $studentFullname = $_SESSION['student_fullName'];
       button.textContent = subjectName;
 
       button.addEventListener("click", function () {
-        subjectTitle.textContent = subjectName;
-        subjectId.textContent = data[subjectName].id;
-        subjectDescription.textContent = data[subjectName].description;
-        modal.style.display = "block";
-      });
+  const selectedSubject = subjectName;
+  const selectedSubjectId = data[subjectName].id;
+  subjectTitle.textContent = selectedSubject;
+  subjectId.textContent = selectedSubjectId;
+  subjectDescription.textContent = data[subjectName].description;
+  loadTutorsForSubject(selectedSubjectId);
+  modal.style.display = "block";
+});
+
 
       subjectButtonsContainer.appendChild(button);
     });
   }
 
   document.getElementById("enroll-btn").addEventListener("click", function () {
-    const subjectID = document.getElementById("subject-id").textContent;
+  const subjectID = document.getElementById("subject-id").textContent;
+  const tutorID = document.getElementById("tutor-select").value;
 
-    fetch("enroll_subject.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `subjectID=${subjectID}`
-    })
-    .then(response => response.text())
-    .then(data => {
-      alert(data);
-    });
+  if (!tutorID) {
+    alert("Please select a tutor.");
+    return;
+  }
+
+  fetch("enroll_subject.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `subjectID=${subjectID}&tutorID=${tutorID}`
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert(data);
   });
+});
 
   closeBtn.addEventListener("click", function () {
     modal.style.display = "none";
@@ -194,6 +213,25 @@ $studentFullname = $_SESSION['student_fullName'];
   document.getElementById("my-subject-btn").addEventListener("click", () => window.location.href = "subjectstudent.php");
   document.getElementById("feedback-btn").addEventListener("click", () => window.location.href = "feedbackstudent.php");
 });
+function loadTutorsForSubject(subjectID) {
+  fetch("get_tutors_by_subject.php?subjectID=" + subjectID)
+    .then(res => res.json())
+    .then(tutors => {
+      const tutorSelect = document.getElementById("tutor-select");
+      tutorSelect.innerHTML = "<option value=''>Select a tutor</option>";
+      if (tutors.length === 0) {
+        tutorSelect.innerHTML = "<option value=''>No tutor available</option>";
+      } else {
+        tutors.forEach(tutor => {
+          const option = document.createElement("option");
+          option.value = tutor.tutorID;
+          option.textContent = tutor.tutor_fullName;
+          tutorSelect.appendChild(option);
+        });
+      }
+    });
+}
+
 </script>
 
 </body>

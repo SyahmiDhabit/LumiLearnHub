@@ -26,17 +26,17 @@ if ($result->num_rows > 0) {
 }
 
 // Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject
-$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ?";
+$queryApplied = "SELECT subjectID, status FROM tutor_subject WHERE tutorID = ?";
 $stmtApplied = $conn->prepare($queryApplied);
 $stmtApplied->bind_param("i", $tutorID);
 $stmtApplied->execute();
 $appliedSubjectsResult = $stmtApplied->get_result();
 
-// Simpan ID subjek yang sudah dipohon oleh tutor
-$appliedSubjectIDs = [];
+$appliedSubjectStatus = [];
 while ($row = $appliedSubjectsResult->fetch_assoc()) {
-    $appliedSubjectIDs[] = $row['subjectID'];
+    $appliedSubjectStatus[$row['subjectID']] = $row['status'];
 }
+
 
 $conn->close();
 ?>
@@ -88,14 +88,19 @@ $conn->close();
         <div class="form-group">
           <label for="subject">Subject:</label>
           <select id="subject" name="subject" class="form-control" required>
-            <?php
-            foreach ($subjects as $subject) {
-                $selected = ($subject['subjectID'] == $selectedSubjectID) ? 'selected' : ''; // Setkan subjek yang dipilih
-                $disabled = (in_array($subject['subjectID'], $appliedSubjectIDs)) ? 'disabled' : ''; // Disable applied subjects
-                echo "<option value='" . $subject['subjectID'] . "' $selected $disabled>" . $subject['subject_name'] . "</option>";
-            }
-            ?>
-          </select>
+  <?php
+  foreach ($subjects as $subject) {
+      $subjectID = $subject['subjectID'];
+      $subjectName = $subject['subject_name'];
+      $status = isset($appliedSubjectStatus[$subjectID]) ? $appliedSubjectStatus[$subjectID] : null;
+      $selected = ($subjectID == $selectedSubjectID) ? 'selected' : '';
+      $disabled = ($status && strtolower($status) !== 'rejected') ? 'disabled' : '';
+      $statusText = $status && strtolower($status) !== 'rejected' ? " ($status)" : '';
+      echo "<option value='$subjectID' $selected $disabled>$subjectName$statusText</option>";
+  }
+  ?>
+</select>
+
         </div>
 
         <!-- Level -->

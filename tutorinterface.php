@@ -19,17 +19,18 @@ $query = "SELECT * FROM subject";
 $result = $conn->query($query);
 
 // Dapatkan subjek yang sudah dipohon oleh tutor daripada table tutor_subject dengan status 'Approved'
-$queryApplied = "SELECT subjectID FROM tutor_subject WHERE tutorID = ? AND status = 'Approved'";
+$queryApplied = "SELECT subjectID, status FROM tutor_subject WHERE tutorID = ?";
 $stmtApplied = $conn->prepare($queryApplied);
 $stmtApplied->bind_param("i", $tutorID);
 $stmtApplied->execute();
 $appliedSubjectsResult = $stmtApplied->get_result();
 
 // Simpan ID subjek yang sudah dipohon oleh tutor dengan status 'Approved'
-$appliedSubjectIDs = [];
+$appliedSubjectStatuses = []; // subjectID => status
 while ($row = $appliedSubjectsResult->fetch_assoc()) {
-    $appliedSubjectIDs[] = $row['subjectID'];
+    $appliedSubjectStatuses[$row['subjectID']] = $row['status'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -76,22 +77,36 @@ while ($row = $appliedSubjectsResult->fetch_assoc()) {
         <div class="subject-list-container">
           <h3>Subjects to Apply</h3>
           <ul class="subject-list">
-            <?php while ($row = $result->fetch_assoc()): ?>
-              <li>
-                <?php if (in_array($row['subjectID'], $appliedSubjectIDs)): ?>
-                  <!-- If applied and approved, show as non-clickable -->
-                  <div class="subject-box applied">
-                    <span class="subject-name"><?php echo $row['subject_name']; ?></span>
-                    <span class="status">Applied</span>
-                  </div>
-                <?php else: ?>
-                  <!-- For available subjects, make them clickable -->
-                  <a href="applicationtutor.php?subjectID=<?php echo $row['subjectID']; ?>" class="subject-box">
-                    <span class="subject-name"><?php echo $row['subject_name']; ?></span>
-                  </a>
-                <?php endif; ?>
-              </li>
-            <?php endwhile; ?>
+           <?php while ($row = $result->fetch_assoc()): 
+  $subjectID = $row['subjectID'];
+  $subjectName = $row['subject_name'];
+  $status = isset($appliedSubjectStatuses[$subjectID]) ? strtolower($appliedSubjectStatuses[$subjectID]) : null;
+?>
+  <li>
+    <?php if ($status === 'approved'): ?>
+      <div class="subject-box applied">
+        <span class="subject-name"><?php echo $subjectName; ?></span>
+        <span class="status">Approved</span>
+      </div>
+    <?php elseif ($status === 'pending'): ?>
+  <div class="subject-box pending">
+    <span class="subject-name"><?php echo $subjectName; ?></span>
+    <span class="status">Pending</span>
+  </div>
+
+    <?php elseif ($status === 'rejected'): ?>
+      <a href="applicationtutor.php?subjectID=<?php echo $subjectID; ?>" class="subject-box rejected">
+        <span class="subject-name"><?php echo $subjectName; ?></span>
+        <span class="status">Rejected - Reapply</span>
+      </a>
+    <?php else: ?>
+      <a href="applicationtutor.php?subjectID=<?php echo $subjectID; ?>" class="subject-box">
+        <span class="subject-name"><?php echo $subjectName; ?></span>
+      </a>
+    <?php endif; ?>
+  </li>
+<?php endwhile; ?>
+
           </ul>
         </div>
 

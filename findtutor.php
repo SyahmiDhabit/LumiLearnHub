@@ -6,7 +6,10 @@ if (!isset($_SESSION['student_fullName'])) {
   exit();
 }
 $studentFullname = $_SESSION['student_fullName'];
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,12 +60,15 @@ $studentFullname = $_SESSION['student_fullName'];
   <div id="tutor-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
-      <h2 id="tutor-name"></h2>
-      <p><strong>Tutor ID:</strong> <span id="tutor-id"></span></p>
-      <p><strong>Subject ID:</strong> <span id="subject-id"></span></p>
-      <p><strong>Duration:</strong> <span id="duration"></span></p>
-      <p><strong>Qualification:</strong> <span id="qualification"></span></p>
-      <p><strong>Level:</strong> <span id="level"></span></p>
+     <h2 id="tutor-name"></h2>
+<p><strong>Email:</strong> <span id="tutor-email"></span></p>
+<p><strong>Phone:</strong> <span id="tutor-phone"></span></p>
+<hr>
+<label for="subject-select"><strong>Subjects:</strong></label>
+<select id="subject-select" style="width: 100%; padding: 5px;"></select>
+
+<div id="subject-details"></div>
+
     </div>
   </div>
 
@@ -98,32 +104,64 @@ $studentFullname = $_SESSION['student_fullName'];
         url: "get_tutors.php",
         method: "GET",
         dataType: "json",
-        success: function (data) {
-          tutorData = data;
-          const list = document.getElementById("tutor-list");
-          list.innerHTML = "";
+       success: function (data) {
+  tutorData = data;
+  const list = document.getElementById("tutor-list");
+  list.innerHTML = "";
 
-          data.forEach((tutor, index) => {
-            const div = document.createElement("div");
-            div.className = "tutor-item";
-            div.innerHTML = `<img src="image/LoginUser.png" alt="Tutor">${tutor.tutor_fullName}`;
-            div.dataset.index = index;
-            list.appendChild(div);
-          });
+  data.forEach((tutor, index) => {
+    const div = document.createElement("div");
+    div.className = "tutor-item";
+    div.innerHTML = `<img src="image/LoginUser.png" alt="Tutor">${tutor.tutor_fullName}`;
+    div.dataset.index = index;
+    list.appendChild(div);
+  });
 
-          document.querySelectorAll(".tutor-item").forEach(item => {
-            item.addEventListener("click", function () {
-              const t = tutorData[this.dataset.index];
-              document.getElementById("tutor-name").textContent = t.tutor_fullName;
-              document.getElementById("tutor-id").textContent = t.tutorID;
-              document.getElementById("subject-id").textContent = t.subjectID;
-              document.getElementById("duration").textContent = t.duration;
-              document.getElementById("qualification").textContent = t.qualification;
-              document.getElementById("level").textContent = t.level;
-              document.getElementById("tutor-modal").style.display = "block";
-            });
-          });
-        }
+  document.querySelectorAll(".tutor-item").forEach(item => {
+    item.addEventListener("click", function () {
+      const t = tutorData[this.dataset.index];
+      document.getElementById("tutor-name").textContent = t.tutor_fullName;
+      document.getElementById("tutor-email").textContent = t.tutor_email;
+      document.getElementById("tutor-phone").textContent = t.tutor_phoneNumber;
+
+      document.getElementById("tutor-email").textContent = t.tutor_email;
+document.getElementById("tutor-phone").textContent = t.tutor_phoneNumber;
+
+const subjectSelect = document.getElementById("subject-select");
+const subjectDetails = document.getElementById("subject-details");
+subjectSelect.innerHTML = "";
+subjectDetails.innerHTML = "";
+
+// Populate combo box
+t.subjects.forEach((sub, idx) => {
+  const option = document.createElement("option");
+  option.value = idx;
+  option.textContent = sub.subject_name;
+  subjectSelect.appendChild(option);
+});
+
+// Show default subject details
+function showSubjectInfo(index) {
+  const sub = t.subjects[index];
+  subjectDetails.innerHTML = `
+    <p><strong>Duration:</strong> ${sub.duration}</p>
+    <p><strong>Qualification:</strong> ${sub.qualification}</p>
+    <p><strong>Level:</strong> ${sub.level}</p>
+  `;
+}
+showSubjectInfo(0); // Default
+
+// Update details on combo change
+subjectSelect.addEventListener("change", function () {
+  showSubjectInfo(this.value);
+});
+
+      document.getElementById("tutor-modal").style.display = "block";
+    });
+  });
+}
+
+
       });
 
       document.querySelector(".close-btn").addEventListener("click", function () {

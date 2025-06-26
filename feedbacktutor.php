@@ -19,15 +19,15 @@ $feedbackQuery = "
     stu.student_fullName,
     f.rate,
     f.comment
-  FROM tutor_subject ts
-  JOIN subject s ON ts.subjectID = s.subjectID
-  JOIN student_subject ss ON ss.subjectID = s.subjectID
+  FROM student_subject ss
+  JOIN subject s ON ss.subjectID = s.subjectID
   JOIN student stu ON ss.studentID = stu.studentID
   LEFT JOIN feedback f 
-      ON f.studentID = stu.studentID AND f.subjectID = s.subjectID
-  WHERE ts.tutorID = $tutorID
-  GROUP BY s.subjectID, stu.studentID
+      ON f.studentID = ss.studentID AND f.subjectID = ss.subjectID
+  WHERE ss.tutorID = $tutorID AND ss.status = 'Enrolled'
+  ORDER BY s.subject_name, stu.student_fullName
 ";
+
 
 
 $result = $conn->query($feedbackQuery);

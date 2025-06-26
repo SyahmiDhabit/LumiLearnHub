@@ -17,14 +17,18 @@ $studentQuery = "
         st.student_fullName,
         st.student_phoneNumber,
         st.student_email
-    FROM tutor_subject ts
-    JOIN subject s ON ts.subjectID = s.subjectID
-    JOIN student_subject ss ON ss.subjectID = s.subjectID
+    FROM student_subject ss
+    JOIN subject s ON ss.subjectID = s.subjectID
     JOIN student st ON ss.studentID = st.studentID
-    WHERE ts.tutorID = $tutorID AND ss.status = 'Enrolled'
+    WHERE ss.tutorID = ? AND ss.status = 'Enrolled'
+    ORDER BY st.student_fullName, s.subject_name
 ";
 
-$result = $conn->query($studentQuery);
+$stmt = $conn->prepare($studentQuery);
+$stmt->bind_param("i", $tutorID);
+$stmt->execute();
+$result = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>

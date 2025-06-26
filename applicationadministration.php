@@ -115,9 +115,11 @@
             include 'connection.php';
 
             $sql = "SELECT ts.*, t.tutor_fullName, s.subject_name
-                    FROM tutor_subject ts
-                    JOIN tutor t ON ts.tutorID = t.tutorID
-                    JOIN subject s ON ts.subjectID = s.subjectID";
+                 FROM tutor_subject ts
+                 JOIN tutor t ON ts.tutorID = t.tutorID
+                 JOIN subject s ON ts.subjectID = s.subjectID
+                  ORDER BY ts.tutorsubjectid DESC";
+
 
             $result = $conn->query($sql);
 

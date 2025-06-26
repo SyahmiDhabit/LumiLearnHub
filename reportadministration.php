@@ -42,6 +42,12 @@ include 'connection.php';
      <li><a href="mainpage.php" onclick="return confirmLogout()">LOGOUT</a></li>
   </ul>
 </div>
+<div class="report-section">
+<div class="chart-section" style="padding: 30px;">
+  <h2 style="text-align:center;">Top 5 Subjects by Student Enrollment</h2>
+  <canvas id="enrollmentBarChart" width="200px" height="100px"></canvas>
+</div>
+</div>
 
 
 <!-- REPORT SECTIONS -->
@@ -274,5 +280,105 @@ $ratingQuery .= " GROUP BY t.tutorID, s.subjectID";
   return confirm("Are you sure you want to logout?");
 }
 </script>
+<?php
+// Top 5 subjects by enrollment
+$subjectLabels = [];
+$subjectData = [];
+$studentsBySubject = [];
+
+$result = $conn->query("
+  SELECT sub.subjectID, sub.subject_name, COUNT(*) AS total
+  FROM student_subject ss
+  JOIN subject sub ON ss.subjectID = sub.subjectID
+  GROUP BY ss.subjectID
+  ORDER BY total DESC
+  LIMIT 5
+");
+
+while ($row = $result->fetch_assoc()) {
+  $subjectID = $row['subjectID'];
+  $subjectLabels[] = $row['subject_name'];
+  $subjectData[] = $row['total'];
+
+  // Get students for this subject
+  $studentsRes = $conn->query("
+    SELECT s.student_fullName
+    FROM student_subject ss
+    JOIN student s ON ss.studentID = s.studentID
+    WHERE ss.subjectID = $subjectID
+  ");
+
+  $studentNames = [];
+  while ($stu = $studentsRes->fetch_assoc()) {
+    $studentNames[] = $stu['student_fullName'];
+  }
+
+  $studentsBySubject[$row['subject_name']] = $studentNames;
+}
+?>
+<?php
+// Top 5 subjects by enrollment
+$subjectLabels = [];
+$subjectData = [];
+
+$result = $conn->query("
+  SELECT sub.subject_name, COUNT(*) AS total
+  FROM student_subject ss
+  JOIN subject sub ON ss.subjectID = sub.subjectID
+  GROUP BY ss.subjectID
+  ORDER BY total DESC
+  LIMIT 5
+");
+
+while ($row = $result->fetch_assoc()) {
+  $subjectLabels[] = $row['subject_name'];
+  $subjectData[] = $row['total'];
+}
+?>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('enrollmentBarChart').getContext('2d');
+  const enrollmentBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: <?= json_encode($subjectLabels); ?>,
+    datasets: [{
+      label: 'Number of Enrollments',
+      data: <?= json_encode($subjectData); ?>,
+      backgroundColor: '#ffffff', // white bars
+      borderColor: '#007bff',     // optional blue border
+      borderWidth: 1
+    }]
+  },
+  options: {
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white' // legend text color
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: 'white' // x-axis labels
+        }
+      },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: 'white', // y-axis labels
+          precision: 0
+        }
+      }
+    }
+  }
+});
+
+</script>
+
+
 </body>
 </html>

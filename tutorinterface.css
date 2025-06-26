@@ -240,3 +240,31 @@ body {
   gap: 10px;
   cursor: pointer;
 }
+.subject-box.applied {
+  background-color: #d4edda;
+  border: 1px solid #28a745;
+}
+
+.subject-box.pending {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+}
+
+.subject-box.rejected {
+  background-color: #f8d7da;
+  border: 1px solid #dc3545;
+}
+.status {
+  float: right;
+  font-weight: bold;
+}
+
+.subject-box.pending {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.subject-box.pending:hover {
+  background-color: #fff3cd; /* Maintain same background */
+}
+

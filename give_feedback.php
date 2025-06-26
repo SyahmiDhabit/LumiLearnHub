@@ -1,31 +1,25 @@
 <?php
-header('Content-Type: application/json');
 session_start();
-include("connection.php");
+include('connection.php');
+
+header('Content-Type: application/json');
 
 if (!isset($_SESSION['studentID'])) {
-    echo json_encode(["error" => "Not logged in"]);
-    exit;
+    echo json_encode(['error' => 'Not logged in']);
+    exit();
 }
 
 $studentID = $_SESSION['studentID'];
 
 $sql = "
-    SELECT 
-        subj.subjectID,
-        subj.subject_name,
-        tut.tutor_fullName,
-        (
-            SELECT COUNT(*) 
-            FROM feedback f 
-            WHERE f.studentID = ss.studentID AND f.subjectID = subj.subjectID
-        ) AS isRated
+    SELECT ss.subjectID, s.subject_name, t.tutor_fullName,
+        (SELECT COUNT(*) FROM feedback 
+         WHERE feedback.subjectID = ss.subjectID 
+         AND feedback.studentID = ss.studentID) AS isRated
     FROM student_subject ss
-    JOIN subject subj ON ss.subjectID = subj.subjectID
-    JOIN tutor_subject ts ON subj.subjectID = ts.subjectID
-    JOIN tutor tut ON ts.tutorID = tut.tutorID
+    JOIN subject s ON ss.subjectID = s.subjectID
+    JOIN tutor t ON ss.tutorID = t.tutorID
     WHERE ss.studentID = ?
-    GROUP BY subj.subjectID, tut.tutor_fullName
 ";
 
 $stmt = $conn->prepare($sql);
@@ -39,6 +33,4 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($data);
-$stmt->close();
-$conn->close();
 ?>
