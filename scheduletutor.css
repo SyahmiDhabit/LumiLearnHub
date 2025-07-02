@@ -1,0 +1,210 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #8D6C6C;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ac5656;
+  padding: 10px 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: solid 3px;
+  border-top: none;
+  border-color: #621818;
+}
+
+.brand {
+  background: #d8b4b4;
+  color: black;
+  padding: 7px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand:hover {
+  transform: scale(1.05); 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.welcome {
+  font-size: 27px;
+  font-weight: bolder;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-image: url('image/PpLogo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  margin: 20px;
+}
+
+.sidebar {
+  background-color: #8b4444;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-title {
+  background-color: #621818;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 3px solid #E97979;
+}
+
+.menu-item {
+  background-color: #E97979;
+  padding: 25px ;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #000000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  background-color: #f19595;
+}
+
+.menu-chosen {
+    background-color: #E97979;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    border: 7px solid #621818;
+}
+
+.menu-icon {
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+}
+
+.main-content {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.schedule-table {
+  width: 100%;
+  color: black;
+  border-collapse: collapse;
+  background-color: #e1bfbf;
+  border: 3px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.schedule-table th {
+  background-color: #e8bebe;
+  font-weight: bold;
+}
+
+.schedule-table td:first-child {
+  font-weight: bold;
+  background-color: #e5a9a9;
+}
+
+.schedule-table th {
+  font-weight: bold;
+  background-color: #e5a9a9;
+}
+
+/* Styling for form inputs */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 3px solid #621818;
+  background-color: #e5a9a9;
+  color: #000;
+}
+
+.form-control:focus {
+  border-color: #ac5656;
+  outline: none;
+  background-color: #f4d7d7;
+}
+
+/* Styling for buttons */
+.action-btn {
+  background-color: #ac5656;
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: 3px solid #621818;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-btn:hover {
+  background-color: #f19595;
+  border-color: #621818;
+}
+
+/* Remove button styling */
+.action-btn-remove {
+  background-color: #da6666;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: 3px solid #621818;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.action-btn-remove:hover {
+  background-color: #f19595;
+  border-color: #621818;
+}

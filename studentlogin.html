@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css" type="text/css">
+</head>
+<body>
+  <div class="bar">
+    <button class="back-btn" id="back-btn">BACK TO HOME</button>
+    <div class="right-group">
+      <label class="text">Don't have an account? New member</label>
+      <button class="signup-btn" id="signupButton">SIGN UP</button>
+    </div>
+  </div>
+
+  <h1>Student Login</h1>
+
+  <div class="center-wrapper">
+    <section>
+      <article class="form">
+        <form action="loginstudent.php" method="post">
+          <div class="full-width">
+            <label for="student_username">Username</label>
+            <input type="text" id="student_username" name="student_username" required>
+          </div>
+
+          <div class="full-width">
+            <label for="student_password">Password</label>
+            <input type="password" id="student_password" name="student_password" required>
+          </div>
+
+          <div class="full-width status">
+            <p>I am a Student</p>
+          </div>
+
+          <div class="full-width form-buttons">
+            <input type="submit" value="Proceed" id="submit">
+            <a href="mainpage.php" class="cancel-link">Cancel</a>
+          </div>
+        </form>
+      </article>
+    </section>
+  </div>
+
+  <footer>
+    <p class="footer">© 2025 LumiLearnHub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("signupButton").onclick = function () {
+        window.location.href = "signup.html";
+      };
+      document.getElementById("back-btn").onclick = function () {
+        window.location.href = "mainpage.php";
+      };
+    });
+  </script>
+</body>
+</html>
